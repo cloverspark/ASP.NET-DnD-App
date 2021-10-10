@@ -9,5 +9,7 @@ namespace ASP.NET_DnD_App.Data
             : base(options)
         {
         }
+
+        public DbSet<Models.Character> characters {  get; set; }
     }
 }
