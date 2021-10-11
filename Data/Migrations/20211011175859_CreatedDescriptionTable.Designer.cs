@@ -4,6 +4,7 @@ using ASP.NET_DnD_App.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ASP.NET_DnD_App.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211011175859_CreatedDescriptionTable")]
+    partial class CreatedDescriptionTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -46,7 +48,7 @@ namespace ASP.NET_DnD_App.Data.Migrations
 
                     b.HasKey("CharacterId");
 
-                    b.ToTable("Characters");
+                    b.ToTable("characters");
                 });
 
             modelBuilder.Entity("ASP.NET_DnD_App.Models.Description", b =>
@@ -79,7 +81,7 @@ namespace ASP.NET_DnD_App.Data.Migrations
 
                     b.HasKey("DescriptionId");
 
-                    b.ToTable("Description");
+                    b.ToTable("description");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
