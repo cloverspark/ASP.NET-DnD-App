@@ -11,7 +11,6 @@ namespace ASP.NET_DnD_App.Models
         [Required]
         public string? CharacterName { get; set; }
 
-        [Required]
         public string? ClassName {  get; set;}
 
         public int DescriptionId { get; set; }
