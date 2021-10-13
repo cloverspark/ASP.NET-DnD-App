@@ -15,7 +15,8 @@ namespace ASP.NET_DnD_App.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            ViewData["Home"] = "Home";
+            return View(ViewData["Home"]);
         }
 
         public IActionResult Privacy()

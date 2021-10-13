@@ -22,4 +22,8 @@
     <Folder Include="wwwroot\lib\jquery\dist\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="wwwroot\Photos\DnD-BackgroundImage.jpg" />
+  </ItemGroup>
+
 </Project>
