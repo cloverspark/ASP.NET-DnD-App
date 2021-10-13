@@ -13,7 +13,7 @@ namespace ASP.NET_DnD_App.Models
 
         public string? ClassName {  get; set;}
 
-        public int DescriptionId { get; set; }
+        public Description CharacterDescription { get; set; }
 
         public int CharacterSheetId { get; set; }
     }
