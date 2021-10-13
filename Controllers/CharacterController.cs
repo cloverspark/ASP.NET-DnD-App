@@ -11,12 +11,6 @@ namespace ASP.NET_DnD_App.Controllers
             return View();
         }
 
-        // GET: CharacterController/Current
-        public ActionResult Current() 
-        {
-            return View();
-        }
-
         // GET: CharacterController/Create
         public ActionResult Create()
         {
