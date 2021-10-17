@@ -11,12 +11,6 @@ namespace ASP.NET_DnD_App.Controllers
             return View();
         }
 
-        // GET: DescriptionController/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
         // GET: DescriptionController/Create
         public ActionResult Create()
         {
