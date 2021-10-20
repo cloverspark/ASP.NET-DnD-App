@@ -15,6 +15,8 @@ namespace ASP.NET_DnD_App.Models
 
         public int DescriptionId { get; set; }
 
+        public string? DescriptionResults {  get; set; }    
+
         public int CharacterSheetId { get; set; }
     }
 }

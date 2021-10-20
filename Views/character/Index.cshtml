@@ -1,5 +1,15 @@
-﻿@*
+﻿@Model IEnumberable<Character>
+@inject IHttpContextAccessor http
+@*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
+    ViewData["Title"] = "Character Catalog";
 }
+
+<h1>Characters List</h1>
+
+
+<a asp-action="Create" asp-controller="Character">
+    Add Character
+</a>
