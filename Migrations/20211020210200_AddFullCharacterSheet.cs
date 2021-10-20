@@ -4,7 +4,7 @@
 
 namespace ASP.NET_DnD_App.Migrations
 {
-    public partial class AddedFullCharacterSheet : Migration
+    public partial class AddFullCharacterSheet : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -12,12 +12,10 @@ namespace ASP.NET_DnD_App.Migrations
                 name: "FullCharacterSheet",
                 columns: table => new
                 {
-                    CharacterId = table.Column<int>(type: "int", nullable: false)
+                    CharacterSheetId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     CharacterName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ClassName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    DescriptionId = table.Column<int>(type: "int", nullable: false),
-                    CharacterSheetId = table.Column<int>(type: "int", nullable: false),
                     HairStyle = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     HairColor = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     EyeColor = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -26,7 +24,7 @@ namespace ASP.NET_DnD_App.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_FullCharacterSheet", x => x.CharacterId);
+                    table.PrimaryKey("PK_FullCharacterSheet", x => x.CharacterSheetId);
                 });
         }
 
