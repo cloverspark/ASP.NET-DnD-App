@@ -12,8 +12,5 @@ namespace ASP.NET_DnD_App.Data
         {
         }
 
-        public DbSet<Models.Character> Characters {  get; set; }
-
-        public DbSet<Models.Description> Description {  get; set; }
-    }
+    }  
 }
