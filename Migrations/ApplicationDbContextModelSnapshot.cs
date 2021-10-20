@@ -24,25 +24,19 @@ namespace ASP.NET_DnD_App.Migrations
 
             modelBuilder.Entity("ASP.NET_DnD_App.Models.FullCharacterSheet", b =>
                 {
-                    b.Property<int>("CharacterId")
+                    b.Property<int>("CharacterSheetId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CharacterId"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CharacterSheetId"), 1L, 1);
 
                     b.Property<string>("CharacterName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("CharacterSheetId")
-                        .HasColumnType("int");
-
                     b.Property<string>("ClassName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("DescriptionId")
-                        .HasColumnType("int");
 
                     b.Property<string>("EyeColor")
                         .IsRequired()
@@ -64,7 +58,7 @@ namespace ASP.NET_DnD_App.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("CharacterId");
+                    b.HasKey("CharacterSheetId");
 
                     b.ToTable("FullCharacterSheet");
                 });

@@ -1,0 +1,63 @@
+﻿@model ASP.NET_DnD_App.Models.FullCharacterSheet
+
+@{
+    ViewData["Title"] = "Create a Character";
+}
+
+<h1>Create</h1>
+
+<h4>FullCharacterSheet</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="CharacterName" class="control-label"></label>
+                <input asp-for="CharacterName" class="form-control" />
+                <span asp-validation-for="CharacterName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ClassName" class="control-label"></label>
+                <input asp-for="ClassName" class="form-control" />
+                <span asp-validation-for="ClassName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="HairStyle" class="control-label"></label>
+                <input asp-for="HairStyle" class="form-control" />
+                <span asp-validation-for="HairStyle" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="HairColor" class="control-label"></label>
+                <input asp-for="HairColor" class="form-control" />
+                <span asp-validation-for="HairColor" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EyeColor" class="control-label"></label>
+                <input asp-for="EyeColor" class="form-control" />
+                <span asp-validation-for="EyeColor" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SkinType" class="control-label"></label>
+                <input asp-for="SkinType" class="form-control" />
+                <span asp-validation-for="SkinType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RaceName" class="control-label"></label>
+                <input asp-for="RaceName" class="form-control" />
+                <span asp-validation-for="RaceName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
