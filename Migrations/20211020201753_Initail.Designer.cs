@@ -9,11 +9,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace ASP.NET_DnD_App.Data.Migrations
+namespace ASP.NET_DnD_App.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20211011180045_UpdatedTableNames")]
-    partial class UpdatedTableNames
+    [Migration("20211020201753_Initail")]
+    partial class Initail
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -23,66 +23,6 @@ namespace ASP.NET_DnD_App.Data.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
-
-            modelBuilder.Entity("ASP.NET_DnD_App.Models.Character", b =>
-                {
-                    b.Property<int>("CharacterId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CharacterId"), 1L, 1);
-
-                    b.Property<string>("CharacterName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("CharacterSheetId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ClassName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("DescriptionId")
-                        .HasColumnType("int");
-
-                    b.HasKey("CharacterId");
-
-                    b.ToTable("Characters");
-                });
-
-            modelBuilder.Entity("ASP.NET_DnD_App.Models.Description", b =>
-                {
-                    b.Property<int>("DescriptionId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("DescriptionId"), 1L, 1);
-
-                    b.Property<string>("EyeColor")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("HairColor")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("HairStyle")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("RaceName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("SkinType")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("DescriptionId");
-
-                    b.ToTable("Description");
-                });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
