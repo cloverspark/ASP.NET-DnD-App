@@ -12,5 +12,6 @@ namespace ASP.NET_DnD_App.Data
         {
         }
 
+        public DbSet<Models.FullCharacterSheet> FullCharacterSheet {  get; set;}
     }  
 }
