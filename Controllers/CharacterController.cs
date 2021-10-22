@@ -45,16 +45,19 @@ namespace ASP.NET_DnD_App.Controllers
         // POST: CharacterController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public async Task<IActionResult> Create(FullCharacterSheet c)
         {
-            try
+            if (ModelState.IsValid)
             {
-                return RedirectToAction(nameof(Index));
+                await FullCharacterSheetDB.AddProductAsync(_context, c);
+
+                TempData["Message"] = $"{c.CharacterName} was added successfully";
+
+                // redirect back to catalog page
+                return RedirectToAction("Index");
             }
-            catch
-            {
-                return View();
-            }
+
+            return View();
         }
 
         // GET: CharacterController/Edit/5

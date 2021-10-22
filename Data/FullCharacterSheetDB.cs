@@ -34,5 +34,13 @@ namespace ASP.NET_DnD_App.Data
                         .Take(pageSize)
                         .ToListAsync();
         }
+
+        public static async Task<FullCharacterSheet> AddProductAsync(ApplicationDbContext _context, FullCharacterSheet p)
+        {
+            // Add to DB
+            _context.FullCharacterSheet.Add(p);
+            await _context.SaveChangesAsync();
+            return p;
+        }
     }
 }
