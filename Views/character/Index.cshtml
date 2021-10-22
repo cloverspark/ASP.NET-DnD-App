@@ -1,4 +1,4 @@
-﻿@Model <Character>
+﻿@Model <FullCharacterSheet>
 @inject IHttpContextAccessor http
 @*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -13,3 +13,44 @@
 <a asp-action="Create" asp-controller="Character">
     Add Character
 </a>
+
+<div class="table-responsive">
+    <table class="table table-hover table-striped">
+        <thead>
+            <tr>
+                <th>@Html.DisplayNameFor(m => m.CharacterName)</th>
+                <th>@Html.DisplayNameFor(m => m.ClassName)</th>
+                <th>@Html.DisplayNameFor(m => m.RaceName)</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                // mywebsite.com/Product/Index/5
+                string prevUrl = http.HttpContext.Request.Path;
+
+            }
+
+
+            @foreach (FullCharacterSheet c in Model)
+            {
+                <tr>
+                    <td>@c.ClassName</td>
+                    <td>@Html.DisplayFor(m => c.CharacterName)</td>
+                    <td>@c.RaceName</td>
+                    <td>
+                        <a class="btn btn-secondary" asp-route-id="@c.CharacterSheetId" asp-action="Edit">Edit</a>
+                        <a class="btn btn-danger" asp-route-id="@c.CharacterSheetId" asp-action="Delete">Delete</a>
+                        <a class="btn btn-primary"
+                           asp-route-id="@c.CharacterSheetId"
+                           asp-route-prevUrl="@prevUrl"
+                           asp-controller="Cart"
+                           asp-action="Add">
+                            Add to Cart
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

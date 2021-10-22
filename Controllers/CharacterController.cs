@@ -1,14 +1,39 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore;
+using System.Threading.Tasks;
+using ASP.NET_DnD_App.Models;
+using ASP.NET_DnD_App.Data;
 
 namespace ASP.NET_DnD_App.Controllers
 {
     public class CharacterController : Controller
     {
-        // GET: CharacterController
-        public ActionResult Index()
+        private readonly ApplicationDbContext _context;
+
+        public CharacterController(ApplicationDbContext context)
         {
-            return View();
+            _context = context;
+        }
+        // GET: CharacterController
+        public async Task<IActionResult> Index(int? id)
+        {
+            // https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/operators/null-coalescing-operator
+            int pageNum = id ?? 1;
+            const int PageSize = 8;
+            ViewData["CurrentPage"] = pageNum;
+
+            int numProducts = await FullCharacterSheetDB.GetTotalProductsAsync(_context);
+            int totalPages = (int)Math.Ceiling((double)numProducts / PageSize);
+            ViewData["MaxPage"] = totalPages;
+
+            List<FullCharacterSheet> products =
+                await FullCharacterSheetDB.GetProductsAsync(_context, PageSize, pageNum);
+
+            // Send list of products to view to be displayed
+            return View(products);
         }
 
         // GET: CharacterController/Create
