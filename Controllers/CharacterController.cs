@@ -25,12 +25,12 @@ namespace ASP.NET_DnD_App.Controllers
             const int PageSize = 8;
             ViewData["CurrentPage"] = pageNum;
 
-            int numProducts = await FullCharacterSheetDB.GetTotalProductsAsync(_context);
+            int numProducts = await FullCharacterSheetDB.GetTotalCharactersAsync(_context);
             int totalPages = (int)Math.Ceiling((double)numProducts / PageSize);
             ViewData["MaxPage"] = totalPages;
 
             List<FullCharacterSheet> products =
-                await FullCharacterSheetDB.GetProductsAsync(_context, PageSize, pageNum);
+                await FullCharacterSheetDB.GetCharactersAsync(_context, PageSize, pageNum);
 
             // Send list of products to view to be displayed
             return View(products);
@@ -49,7 +49,7 @@ namespace ASP.NET_DnD_App.Controllers
         {
             if (ModelState.IsValid)
             {
-                await FullCharacterSheetDB.AddProductAsync(_context, c);
+                await FullCharacterSheetDB.AddCharacterAsync(_context, c);
 
                 TempData["Message"] = $"{c.CharacterName} was added successfully";
 

@@ -12,7 +12,7 @@ namespace ASP.NET_DnD_App.Data
         /// Returns the total count of products
         /// </summary>
         /// <param name="_context">Database context to use</param>
-        public static async Task<int> GetTotalProductsAsync(ApplicationDbContext _context)
+        public static async Task<int> GetTotalCharactersAsync(ApplicationDbContext _context)
         {
             return await (from p in _context.FullCharacterSheet
                           select p).CountAsync();
@@ -25,7 +25,7 @@ namespace ASP.NET_DnD_App.Data
         /// <param name="_context">Database context to use</param>
         /// <param name="pageSize">The number of products per page</param>
         /// <param name="pageNum">Page of products to return</param>
-        public static async Task<List<FullCharacterSheet>> GetProductsAsync(ApplicationDbContext _context, int pageSize, int pageNum)
+        public static async Task<List<FullCharacterSheet>> GetCharactersAsync(ApplicationDbContext _context, int pageSize, int pageNum)
         {
             return await (from p in _context.FullCharacterSheet
                           orderby p.CharacterName ascending
@@ -35,7 +35,7 @@ namespace ASP.NET_DnD_App.Data
                         .ToListAsync();
         }
 
-        public static async Task<FullCharacterSheet> AddProductAsync(ApplicationDbContext _context, FullCharacterSheet p)
+        public static async Task<FullCharacterSheet> AddCharacterAsync(ApplicationDbContext _context, FullCharacterSheet p)
         {
             // Add to DB
             _context.FullCharacterSheet.Add(p);
