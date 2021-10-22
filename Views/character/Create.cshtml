@@ -4,59 +4,149 @@
     ViewData["Title"] = "Create a Character";
 }
 
-<h1>Create</h1>
+<link rel="stylesheet" href="~/css~/css/Create.css" />
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
-<h4>FullCharacterSheet</h4>
+<div data-aos="fade-up" data-aos-duration="900">
+    <h1>Create a Character</h1>
+</div>
+
 <hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="CharacterName" class="control-label"></label>
-                <input asp-for="CharacterName" class="form-control" />
-                <span asp-validation-for="CharacterName" class="text-danger"></span>
+<form method="post" class="needs-validation" novalidate>
+    <div data-aos="fade-up" data-aos-duration="1500">
+        <label class="col-sm-2 col-form-label" asp-for="CharacterName">Character Name:</label>
+        <div class="col-sm-3">
+            <input class="form-control" asp-for="CharacterName" required>
+            <div class="valid-feedback">
+                Looks good!
             </div>
-            <div class="form-group">
-                <label asp-for="ClassName" class="control-label"></label>
-                <input asp-for="ClassName" class="form-control" />
-                <span asp-validation-for="ClassName" class="text-danger"></span>
+            <div class="invalid-feedback">
+                Character Name is required!
             </div>
-            <div class="form-group">
-                <label asp-for="HairStyle" class="control-label"></label>
-                <input asp-for="HairStyle" class="form-control" />
-                <span asp-validation-for="HairStyle" class="text-danger"></span>
+        </div>
+    </div>
+    <br />
+    <div data-aos="fade-up" data-aos-duration="1500">
+        <label class="col-sm-2 col-form-label" asp-for="CharacterName">Class:</label>
+        <div class="col-sm-3">
+            <input class="form-control" asp-for="ClassName" required>
+            <div class="valid-feedback">
+                Looks good!
             </div>
-            <div class="form-group">
-                <label asp-for="HairColor" class="control-label"></label>
-                <input asp-for="HairColor" class="form-control" />
-                <span asp-validation-for="HairColor" class="text-danger"></span>
+            <div class="invalid-feedback">
+                Class is required!
             </div>
-            <div class="form-group">
-                <label asp-for="EyeColor" class="control-label"></label>
-                <input asp-for="EyeColor" class="form-control" />
-                <span asp-validation-for="EyeColor" class="text-danger"></span>
+        </div>
+    </div>
+    <br />
+    <div data-aos="fade-up" data-aos-duration="1500">
+        <label class="col-sm-2 col-form-label" asp-for="CharacterName">Hairstyle:</label>
+        <div class="col-sm-3">
+            <input class="form-control" asp-for="HairStyle" required>
+            <div class="valid-feedback">
+                Looks good!
             </div>
-            <div class="form-group">
-                <label asp-for="SkinType" class="control-label"></label>
-                <input asp-for="SkinType" class="form-control" />
-                <span asp-validation-for="SkinType" class="text-danger"></span>
+            <div class="invalid-feedback">
+                Hairstyle is required!
             </div>
-            <div class="form-group">
-                <label asp-for="RaceName" class="control-label"></label>
-                <input asp-for="RaceName" class="form-control" />
-                <span asp-validation-for="RaceName" class="text-danger"></span>
+        </div>
+    </div>
+    <br />
+    <div data-aos="fade-up" data-aos-duration="1500">
+        <label class="col-sm-2 col-form-label" asp-for="CharacterName">Hair Color:</label>
+        <div class="col-sm-3">
+            <input class="form-control" asp-for="HairColor" required>
+            <div class="valid-feedback">
+                Looks good!
             </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+            <div class="invalid-feedback">
+                Hair Color is required!
             </div>
-        </form>
+        </div>
+    </div>
+    <br />
+    <div data-aos="fade-up" data-aos-duration="1500">
+       <label class="col-sm-2 col-form-label" asp-for="CharacterName">Eye Color:</label>
+        <div class="col-sm-3">
+            <input class="form-control" asp-for="EyeColor" required>
+            <div class="valid-feedback">
+                Looks good!
+            </div>
+            <div class="invalid-feedback">
+                Eye Color is required!
+            </div>
+        </div>
+    </div>
+    <br />
+    <div data-aos="fade-up" data-aos-duration="1500">
+        <label class="col-sm-2 col-form-label" asp-for="CharacterName">Skin Type:</label>
+        <div class="col-sm-3">
+            <input class="form-control" asp-for="SkinType" required>
+            <div class="valid-feedback">
+                Looks good!
+            </div>
+            <div class="invalid-feedback">
+                Skin Type is required!
+            </div>
+        </div>
+    </div>
+    <br />
+    <div data-aos="fade-up" data-aos-duration="1500">
+        <label class="col-sm-2 col-form-label" asp-for="CharacterName">Race:</label>
+        <div class="col-sm-3">
+            <input class="form-control" asp-for="RaceName" required>
+            <div class="valid-feedback">
+                Looks good!
+            </div>
+            <div class="invalid-feedback">
+                Race is required!
+            </div>
+        </div>
+    </div>
+    <br />
+    <br />
+    <div data-aos="fade-up" data-aos-duration="1500">
+        <div class="form-group">
+            <input type="submit" value="Create Character" class="btn btn-success" />
+        </div>
+    </div>
+</form>
+    <br />
+    <br />
+<div data-aos="fade-up" data-aos-duration="1500">
+    <div>
+        <a asp-action="Index">Back to List</a>
     </div>
 </div>
+    <br />
+    <br />
+    <br />
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+  AOS.init();
+</script>
+
+<script>
+// Example starter JavaScript for disabling form submissions if there are invalid fields
+(function() {
+  'use strict';
+  window.addEventListener('load', function() {
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    var forms = document.getElementsByClassName('needs-validation');
+    // Loop over them and prevent submission
+    var validation = Array.prototype.filter.call(forms, function(form) {
+      form.addEventListener('submit', function(event) {
+        if (form.checkValidity() === false) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+        form.classList.add('was-validated');
+      }, false);
+    });
+  }, false);
+})();
+</script>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
