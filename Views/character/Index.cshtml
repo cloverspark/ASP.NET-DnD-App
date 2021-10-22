@@ -1,8 +1,6 @@
 ﻿@Model IEnumerable<FullCharacterSheet>
 @inject IHttpContextAccessor http
-@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+
 @{
     ViewData["Title"] = "Character Catalog";
 }
@@ -18,8 +16,9 @@
     <table class="table table-hover table-striped">
         <thead>
             <tr>
-                
-               
+               <th>Class</th>
+               <th>Name</th>
+               <th>Race</th>
             </tr>
         </thead>
         <tbody>
