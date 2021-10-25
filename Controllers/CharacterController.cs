@@ -93,6 +93,11 @@ namespace ASP.NET_DnD_App.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             FullCharacterSheet c = await FullCharacterSheetDB.GetCharacterAsync(_context, id);
+
+            _context.Entry(c).State = EntityState.Deleted;
+
+            await _context.SaveChangesAsync();
+
             return RedirectToAction("Index");
         }
     }
