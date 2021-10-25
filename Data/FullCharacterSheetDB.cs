@@ -9,13 +9,13 @@ namespace ASP.NET_DnD_App.Data
     public class FullCharacterSheetDB
     {
         /// <summary>
-        /// Returns the total count of products
+        /// Returns the total count of FullCharacterSheet
         /// </summary>
         /// <param name="_context">Database context to use</param>
         public static async Task<int> GetTotalCharactersAsync(ApplicationDbContext _context)
         {
-            return await (from p in _context.FullCharacterSheet
-                          select p).CountAsync();
+            return await (from c in _context.FullCharacterSheet
+                          select c).CountAsync();
         }
 
 
@@ -24,23 +24,30 @@ namespace ASP.NET_DnD_App.Data
         /// </summary>
         /// <param name="_context">Database context to use</param>
         /// <param name="pageSize">The number of products per page</param>
-        /// <param name="pageNum">Page of products to return</param>
+        /// <param name="pageNum">Page of FullCharacterSheet to return</param>
         public static async Task<List<FullCharacterSheet>> GetCharactersAsync(ApplicationDbContext _context, int pageSize, int pageNum)
         {
-            return await (from p in _context.FullCharacterSheet
-                          orderby p.CharacterName ascending
-                          select p)
+            return await (from c in _context.FullCharacterSheet
+                          orderby c.CharacterName ascending
+                          select c)
                         .Skip(pageSize * (pageNum - 1)) // Skip() must be before Take()
                         .Take(pageSize)
                         .ToListAsync();
         }
 
-        public static async Task<FullCharacterSheet> AddCharacterAsync(ApplicationDbContext _context, FullCharacterSheet p)
+        public static async Task<FullCharacterSheet> AddCharacterAsync(ApplicationDbContext _context, FullCharacterSheet c)
         {
             // Add to DB
-            _context.FullCharacterSheet.Add(p);
+            _context.FullCharacterSheet.Add(c);
             await _context.SaveChangesAsync();
-            return p;
+            return c;
+        }
+        public static async Task<FullCharacterSheet> GetCharacterAsync(ApplicationDbContext context, int prodId)
+        {
+            FullCharacterSheet c = await (from FullCharacterSheet in context.FullCharacterSheet
+                                          where FullCharacterSheet.CharacterSheetId == prodId
+                               select FullCharacterSheet).SingleAsync();
+            return c;
         }
     }
 }
