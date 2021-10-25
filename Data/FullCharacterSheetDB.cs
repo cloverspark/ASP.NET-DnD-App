@@ -3,6 +3,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using ASP.NET_DnD_App.Models;
+using System.Net;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Threading.Tasks;
 
 namespace ASP.NET_DnD_App.Data
 {
@@ -42,12 +46,13 @@ namespace ASP.NET_DnD_App.Data
             await _context.SaveChangesAsync();
             return c;
         }
-        public static async Task<FullCharacterSheet> GetCharacterAsync(ApplicationDbContext context, int prodId)
+        public static async Task<FullCharacterSheet> GetCharacterAsync(ApplicationDbContext _context, int CharacterSheetId)
         {
-            FullCharacterSheet c = await (from FullCharacterSheet in context.FullCharacterSheet
-                                          where FullCharacterSheet.CharacterSheetId == prodId
-                               select FullCharacterSheet).SingleAsync();
+            FullCharacterSheet c = await (from FullCharacterSheet in _context.FullCharacterSheet
+                                          where FullCharacterSheet.CharacterSheetId == CharacterSheetId
+                                          select FullCharacterSheet).SingleAsync();
             return c;
         }
+        
     }
 }

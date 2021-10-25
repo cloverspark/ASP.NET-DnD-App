@@ -62,7 +62,7 @@ namespace ASP.NET_DnD_App.Controllers
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
-            FullCharacterSheet p = await FullCharacterSheet.GetCharacterAsync(_context, id);
+            FullCharacterSheet p = await FullCharacterSheetDB.GetCharacterAsync(_context, id);
             // pass product to view
             return View(p);
         }
