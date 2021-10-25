@@ -59,47 +59,41 @@ namespace ASP.NET_DnD_App.Controllers
 
             return View();
         }
-
-        // GET: CharacterController/Edit/5
-        public ActionResult Edit(int id)
+        [HttpGet]
+        public async Task<IActionResult> Edit(int id)
         {
-            return View();
+            FullCharacterSheet p = await FullCharacterSheet.GetCharacterAsync(_context, id);
+            // pass product to view
+            return View(p);
         }
 
-        // POST: CharacterController/Edit/5
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public async Task<IActionResult> Edit(FullCharacterSheet c)
         {
-            try
+            if (ModelState.IsValid)
             {
-                return RedirectToAction(nameof(Index));
+                _context.Entry(c).State = EntityState.Modified;
+                await _context.SaveChangesAsync();
+
+                ViewData["Message"] = "Character Sheet updated successfully";
             }
-            catch
-            {
-                return View();
-            }
+
+            return View(c);
         }
 
-        // GET: CharacterController/Delete/5
-        public ActionResult Delete(int id)
+        [HttpGet]
+        public async Task<IActionResult> Delete(int id)
         {
-            return View();
+            FullCharacterSheet c = await FullCharacterSheetDB.GetCharacterAsync(_context, id);
+            return View(c);
         }
 
-        // POST: CharacterController/Delete/5
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        [ActionName("Delete")]
+        public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            FullCharacterSheet c = await FullCharacterSheetDB.GetCharacterAsync(_context, id);
+            return RedirectToAction("Index");
         }
     }
 }
