@@ -1,4 +1,4 @@
-﻿@Model IEnumerable<FullCharacterSheet>
+﻿@Model <FullCharacterSheet>
 @inject IHttpContextAccessor http
 
 @{
@@ -23,12 +23,9 @@
         </thead>
         <tbody>
             @{
-                
                 string prevUrl = http.HttpContext.Request.Path;
 
             }
-
-
             @foreach (FullCharacterSheet c in Model)
             {
                 <tr>
