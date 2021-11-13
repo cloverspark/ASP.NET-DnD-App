@@ -1,65 +1,77 @@
-﻿@Model <FullCharacterSheet>
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+@Model <FullCharacterSheet>
 @inject IHttpContextAccessor http
 
 @{
     ViewData["Title"] = "Character Catalog";
 }
 
-<h1>Characters List</h1>
-
-
-<a asp-action="Create" asp-controller="Character">
-    Add Character
-</a>
-
-<div class="table-responsive">
-    <table class="table table-hover table-striped">
-        <thead>
-            <tr>
-               <th>Class</th>
-               <th>Name</th>
-               <th>Race</th>
-            </tr>
-        </thead>
-        <tbody>
-            @{
-                string prevUrl = http.HttpContext.Request.Path;
-
-            }
-            @foreach (FullCharacterSheet c in Model)
-            {
-                <tr>
-                    <td>@c.ClassName</td>
-                    <td>@Html.DisplayFor(m => c.CharacterName)</td>
-                    <td>@c.RaceName</td>
-                    <td>
-                        <a class="btn btn-secondary" asp-route-id="@c.CharacterSheetId" asp-action="Edit">Edit</a>
-                        <a class="btn btn-danger" asp-route-id="@c.CharacterSheetId" asp-action="Delete">Delete</a> 
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
-</div>
-@* Print page numbers *@
-<ul class="pagination">
-    @for (int i = 1; i <= (int)ViewData["MaxPage"]; i++)
+    @if(SignInManager.IsSignedIn(User))
     {
-        if (i == (int)ViewData["CurrentPage"])
+    <h1>Characters List</h1>
+
+
+    <a asp-action="Create" asp-controller="Character">
+        Add Character
+    </a>
+
+    <div class="table-responsive">
+        <table class="table table-hover table-striped">
+            <thead>
+                <tr>
+                   <th>Class</th>
+                   <th>Name</th>
+                   <th>Race</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    string prevUrl = http.HttpContext.Request.Path;
+
+                }
+                @foreach (FullCharacterSheet c in Model)
+                {
+                    <tr>
+                        <td>@c.ClassName</td>
+                        <td>@Html.DisplayFor(m => c.CharacterName)</td>
+                        <td>@c.RaceName</td>
+                        <td>
+                            <a class="btn btn-secondary" asp-route-id="@c.CharacterSheetId" asp-action="Edit">Edit</a>
+                            <a class="btn btn-danger" asp-route-id="@c.CharacterSheetId" asp-action="Delete">Delete</a> 
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    @* Print page numbers *@
+    <ul class="pagination">
+        @for (int i = 1; i <= (int)ViewData["MaxPage"]; i++)
         {
-            <li class="page-item active">
-                <a class="page-link" asp-action="Index" asp-route-id="@i">
-                    @i
-                </a>
-            </li>
+            if (i == (int)ViewData["CurrentPage"])
+            {
+                <li class="page-item active">
+                    <a class="page-link" asp-action="Index" asp-route-id="@i">
+                        @i
+                    </a>
+                </li>
+            }
+            else
+            {
+                <li class="page-item">
+                    <a class="page-link" asp-action="Index" asp-route-id="@i">
+                        @i
+                    </a>
+                </li>
+            }
         }
-        else
-        {
-            <li class="page-item">
-                <a class="page-link" asp-action="Index" asp-route-id="@i">
-                    @i
-                </a>
-            </li>
-        }
+        </ul>
     }
-</ul>
+
+    else
+    {
+         <h1>You Have to be Signed in to Access This!</h1>
+    }
