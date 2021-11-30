@@ -137,15 +137,22 @@ namespace ASP.NET_DnD_App.Areas.Identity.Pages.Account
                         values: new { area = "Identity", userId = userId, returnUrl = returnUrl },
                         protocol: Request.Scheme);
 
-                    //await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
-                    //    $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                    // Send an email to let the new user that they're account has been created
                     string toEmail = Input.Email;
                     string fromEmail = "dndmanager.noreply@gmail.com";
-                    string subject = "Email Confirmation";
-                    string body = "Thank you for everything you do";
-                    string htmlContent = "<a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>Here</a>";
+                    string subject =  "DnD Account";
+                    string body = "Your Dungeons & Dragons character manger account has been successfully created! We hope you enjoy our website!";
+                    string htmlContent = "";
 
                     var response = await _emailProvider.SendEmailAsync(Input.Username, toEmail, fromEmail, subject, body, htmlContent);
+
+                    // Log user in
+                    Microsoft.AspNetCore.Identity.SignInResult signInResult = Microsoft.AspNetCore.Identity.SignInResult.Failed;
+                    if (user != null)
+                    {
+                        await _signInManager.SignInAsync(user, true);
+                        _logger.LogInformation("User logged in.");
+                    }
 
                     if (_userManager.Options.SignIn.RequireConfirmedAccount)
                     {
