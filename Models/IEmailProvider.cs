@@ -25,7 +25,7 @@ namespace ASP.NET_DnD_App.Models
             {
                 From = new EmailAddress(fromEmail, "Dungeons & Dragons Character Manager Team"),
                 Subject = subject,
-                HtmlContent = username + ", please confirm your email " + htmlContent
+                PlainTextContent = body
             };
             msg.AddTo(new EmailAddress(toEmail, username));
             var response = await client.SendEmailAsync(msg);
