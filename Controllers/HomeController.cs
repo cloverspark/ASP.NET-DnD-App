@@ -6,15 +6,19 @@ namespace ASP.NET_DnD_App.Controllers
 {
     public class HomeController : Controller
     {
+
+        private readonly IEmailProvider _emailProvider;
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, IEmailProvider emailProvider)
         {
             _logger = logger;
+            _emailProvider = emailProvider;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
+            
             ViewData["Home"] = "Home";
             return View(ViewData["Home"]);
         }

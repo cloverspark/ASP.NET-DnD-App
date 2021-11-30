@@ -10,6 +10,7 @@ using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading;
 using System.Threading.Tasks;
+using ASP.NET_DnD_App.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -29,21 +30,21 @@ namespace ASP.NET_DnD_App.Areas.Identity.Pages.Account
         private readonly IUserStore<IdentityUser> _userStore;
         private readonly IUserEmailStore<IdentityUser> _emailStore;
         private readonly ILogger<RegisterModel> _logger;
-        private readonly IEmailSender _emailSender;
+        private readonly IEmailProvider _emailProvider;
 
         public RegisterModel(
             UserManager<IdentityUser> userManager,
             IUserStore<IdentityUser> userStore,
             SignInManager<IdentityUser> signInManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender)
+            IEmailProvider emailProvider)
         {
             _userManager = userManager;
             _userStore = userStore;
             _emailStore = GetEmailStore();
             _signInManager = signInManager;
             _logger = logger;
-            _emailSender = emailSender;
+            _emailProvider = emailProvider;
         }
 
         /// <summary>
@@ -64,6 +65,7 @@ namespace ASP.NET_DnD_App.Areas.Identity.Pages.Account
         ///     directly from your code. This API may change or be removed in future releases.
         /// </summary>
         public IList<AuthenticationScheme> ExternalLogins { get; set; }
+        public string EmailConfirmationUrl { get; private set; }
 
         /// <summary>
         ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
@@ -127,20 +129,39 @@ namespace ASP.NET_DnD_App.Areas.Identity.Pages.Account
                     _logger.LogInformation("User created a new account with password.");
 
                     var userId = await _userManager.GetUserIdAsync(user);
-                    var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-                    code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
+                    //var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                    //code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code)); code = code, 
                     var callbackUrl = Url.Page(
                         "/Account/ConfirmEmail",
                         pageHandler: null,
-                        values: new { area = "Identity", userId = userId, code = code, returnUrl = returnUrl },
+                        values: new { area = "Identity", userId = userId, returnUrl = returnUrl },
                         protocol: Request.Scheme);
 
-                    await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
-                        $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                    //await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
+                    //    $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                    string toEmail = Input.Email;
+                    string fromEmail = "dndmanager.noreply@gmail.com";
+                    string subject = "Email Confirmation";
+                    string body = "Thank you for everything you do";
+                    string htmlContent = "<a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>Here</a>";
+
+                    var response = await _emailProvider.SendEmailAsync(Input.Username, toEmail, fromEmail, subject, body, htmlContent);
 
                     if (_userManager.Options.SignIn.RequireConfirmedAccount)
                     {
-                        return RedirectToPage("RegisterConfirmation", new { email = Input.Email, returnUrl = returnUrl });
+                        if (response.IsSuccessStatusCode)
+                        {
+                            returnUrl = returnUrl ?? Url.Content("~/");
+                            userId = await _userManager.GetUserIdAsync(user);
+                            var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                            code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
+                            EmailConfirmationUrl = Url.Page(
+                                "/Account/ConfirmEmail",
+                                pageHandler: null,
+                                values: new { area = "Identity", userId = userId, code = code, returnUrl = returnUrl },
+                                protocol: Request.Scheme);
+                            return Redirect(EmailConfirmationUrl);
+                        }
                     }
                     else
                     {
