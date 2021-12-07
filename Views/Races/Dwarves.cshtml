@@ -4,6 +4,8 @@
 @{
     ViewData["Title"] = "Dwarves";
 }
+<link rel="stylesheet" href="~/css/Dwarves.css">
+
 <p>In the table below you will see a few of the subraces of Dwarves and their speed,langueges and ability modifiers.This table only shows the most common subraces.There can be many more.</p>
 
 <table class="table">
@@ -18,12 +20,13 @@
   </thead>
   <tbody>
     <tr>
-      <td><button type="button" class="btn btn-link" onclick="GrayONClick">Gray (Duergar)</button></td>
+      <td><button id="hi" type="button" class="btn btn-link" onclick="GrayONClick()">Gray (Duergar)</button></td>
       <td>	Undercommon</td>
       <td>Medium</td>
       <td>25</td>
       <td>2 CON, 1 STR</td>
     </tr>
+    <p style="display=none" class="Des" id="Des"></p>
     <tr>
       <td>Hill Dwarf</td>
       <td>Common, Dwarf</td>
@@ -47,10 +50,12 @@
     </tr>
 </tbody>
 </table>
-<p id="Des">blah blah</p>
-@functions{
-    public void GrayONClick()
-    {
-    
+<script>
+    function GrayONClick() {
+        var p = document.getElementById("Des");
+        p.innerText = "This was hidden";
+        p.style.display = "block";
+
+        //alert("GrayONClick() was called. Something is wrong with the statement above");
     }
-}
+</script>
