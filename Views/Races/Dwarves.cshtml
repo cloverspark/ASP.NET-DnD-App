@@ -6,7 +6,7 @@
 }
 <link rel="stylesheet" href="~/css/Dwarves.css">
 
-<p>In the table below you will see a few of the subraces of Dwarves and their speed,langueges and ability modifiers.This table only shows the most common subraces.There can be many more.</p>
+<p> In the table below you will see a few of the subraces of Dwarves and their speed,langueges and ability modifiers.This table only shows the most common subraces.There can be many more.</p>
 
 <table class="table">
   <thead>
@@ -20,29 +20,28 @@
   </thead>
   <tbody>
     <tr>
-      <td><button id="hi" type="button" class="btn btn-link" onclick="GrayONClick()">Gray (Duergar)</button></td>
+      <td><button id="hi" type="button" class="btn btn-link" onclick="GrayOnClick()">Gray (Duergar)</button></td>
       <td>	Undercommon</td>
       <td>Medium</td>
       <td>25</td>
       <td>2 CON, 1 STR</td>
     </tr>
-    <p style="display=none" class="Des" id="Des"></p>
     <tr>
-      <td>Hill Dwarf</td>
+      <td><button id="hi" type="button" class="btn btn-link" onclick="HillOnClick()">Hill Dwarf</button></td>
       <td>Common, Dwarf</td>
       <td>Medium</td>
       <td>25</td>
       <td>2 CON, 1 WIS</td>
     </tr>
     <tr>
-      <td>Mark of Warding Dwarf</td>
+      <td><button id="hi" type="button" class="btn btn-link" onclick="WardingOnClick()">Mark of Warding Dwarf</button></td>
       <td>Common, Dwarf</td>
       <td>Medium</td>
       <td>25</td>
       <td>2 CON, 1 DEX</td>
     </tr>
     <tr>
-      <td>Mountain Dwarf</td>
+      <td><button id="hi" type="button" class="btn btn-link" onclick="MountainOnClick()">Mountain Dwarf</button></td>
       <td>Common, Dwarf</td>
       <td>Medium</td>
       <td>25</td>
@@ -50,12 +49,26 @@
     </tr>
 </tbody>
 </table>
+<p style="display=none" class="Des" id="Des"></p>
 <script>
-    function GrayONClick() {
+    function GrayOnClick() {
         var p = document.getElementById("Des");
-        p.innerText = "This was hidden";
+        p.innerText = "    A subterranean subrace of dwarves. They carved out an existence in the Underdark, often near volcanoes. Their kinship to other dwarven subraces could be compared to that of the drow to surface elves. Like other dwarves, duergar were typically stocky figures, though beyond this there were many differences. Both male and female duergar were typically bald, with females also lacking the capacity to grow facial hair. Many were also thinner than their dwarven brethren. Most obvious, however, was their dull gray skin and hair, often matched with an equally stolid expression.";
         p.style.display = "block";
-
-        //alert("GrayONClick() was called. Something is wrong with the statement above");
+    }
+    function HillOnClick() {
+        var p = document.getElementById("Des");
+        p.innerText = "    A subterranean subrace of dwarves and the most numerous of the Dwarven Population. They carved out an existence  primarily in the hills. A hill dwarfs entire culture is built around his or her family and it's legacy. Your name, job or accomplishments are often considered secondary to those of your parents.";
+        p.style.display = "block";
+    }
+    function WardingOnClick() {
+        var p = document.getElementById("Des");
+        p.innerText = " The Mark of Warding helps its bearers protect things of value. Using the mark, a dwarf can weave wards with mystic force. It also provides its bearer with an intuitive understanding of locks used to protect and seal. ";
+        p.style.display = "block";
+    }
+    function MountainOnClick() {
+        var p = document.getElementById("Des");
+        p.innerText = "  A subterranean subrace of dwarves, Mountain dwarves build homes in the high peaks and rarified air of the rocky mountains.  In many ways similar to their lowland cousins, mountain dwarves are slightly more reclusive and tend to focus on mining, forging, and crafts a bit more strongly -- their closeness to the dwarven deity Moradin is said to be a cause of this. It is said that a mountain dwarf is born in armor, but this is likely just a mild exaggeration";
+        p.style.display = "block";
     }
 </script>
