@@ -4,10 +4,23 @@
     ViewData["Title"] = "Thank you";
 }
 
-<h1 class="fw-light">Thank You For Singning Up With Us!</h1>
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+<div data-aos="fade-up" data-aos-duration="900">
+    <h1 class="fw-light">Thank You For Singning Up With Us!</h1>
+</div>
 <br />
 <br />
-<h4 class="fw-light">There was an email confirmation sent to your email</h4>
+<div data-aos="fade-up" data-aos-duration="1300">
+    <h4 class="fw-light">There was an email confirmation sent to your email</h4>
+</div>
 <br />
 <br />
-<a asp-controller="Home" asp-action="Index">Return to Home</a>
+<div data-aos="fade-up" data-aos-duration="1600">
+    <a asp-controller="Home" asp-action="Index"><button class="btn btn-primary">Return to Home</button></a>
+</div>
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+  AOS.init();
+</script>
