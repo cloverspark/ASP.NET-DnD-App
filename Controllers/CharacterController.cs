@@ -78,7 +78,7 @@ namespace ASP.NET_DnD_App.Controllers
                 ViewData["Message"] = "Character Sheet updated successfully";
             }
 
-            return View(c);
+            return RedirectToAction("Index");
         }
 
         [HttpGet]
