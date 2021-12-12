@@ -122,12 +122,8 @@ namespace ASP.NET_DnD_App.Areas.Identity.Pages.Account
 
                 Microsoft.AspNetCore.Identity.SignInResult result = Microsoft.AspNetCore.Identity.SignInResult.Failed;
                 if (user != null)
-                {
-                    result = await _signInManager.PasswordSignInAsync(user, Input.Password, Input.RememberMe, lockoutOnFailure: false);
-                }
-
-                if (result.Succeeded)
-                {
+                {   // This will have to be a temporary way to sign in users
+                    await _signInManager.SignInAsync(user, true);
                     _logger.LogInformation("User logged in.");
                     return LocalRedirect(returnUrl);
                 }
