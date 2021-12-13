@@ -10,7 +10,7 @@ You can use this app to store and create characters from Dungeons & Dragons camp
 
 Validation and a easier way to create a characters will be added in the near future.
 
-##Photos
+## Photos
 ![home](https://user-images.githubusercontent.com/80292719/145855174-6618a14c-dedf-4785-9e82-3d5ab46775a3.png)
 On the home page, you will find the login and register button in the top right and if you scroll down you will find the races we have added so far and the back story
 ![reg](https://user-images.githubusercontent.com/80292719/145855508-2c05f55a-346f-4364-b659-9157007de498.png)
