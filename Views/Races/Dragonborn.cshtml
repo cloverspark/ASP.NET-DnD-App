@@ -17,14 +17,14 @@
   </thead>
   <tbody>
     <tr>
-      <td>Ravenite</td>
+      <td><button id="hi" type="button" class="btn btn-link" onclick="RaveniteOnClick()">Ravenite</button></td>
       <td>Common, Draconic</td>
       <td>Medium</td>
       <td>30</td>
       <td>2 STR, 1 CON</td>
     </tr>
     <tr>
-      <td>Draconblood</td>
+      <td><button id="hi" type="button" class="btn btn-link" onclick="DraconbloodOnClick()">Draconblood</button></td>
       <td>Common, Draconic</td>
       <td>Medium</td>
       <td>30</td>
@@ -32,3 +32,17 @@
     </tr> 
 </tbody>
 </table>
+<p style="display=none" class="Des" id="Des"></p>
+<script>
+    function RaveniteOnClick() {
+        var p = document.getElementById("Des");
+        p.innerText = " Ravenite Dragonborn are typically on the larger side of Medium creatures. Ravenites' are distinct for their lack of a tail. This race was once slaves in Draconia. Due to the lack of a tail this race is oppressed by other Dragonborns with a tail.";
+        p.style.display = "block";
+    }
+    function DraconbloodOnClick() {
+        var p = document.getElementById("Des");
+        p.innerText = "Draconblood Dragonborn are Medium sized creatures and either entirely good or evil with little room in-between. This race was the ruling race of Draconia and was either nobility or a slave-owner";
+        p.style.display = "block";
+    }
+    
+</script>
