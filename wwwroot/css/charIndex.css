@@ -1,11 +1,11 @@
 ﻿body {
-    background-image: url(../Photos/wallpaper_Illo-2.jpg);
+    background-image: url(../Photos/dnd.jpg);
     background-position: center center;
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
     min-height: 100%;
-    color: azure;
+    color: oldlace;
     font-family: fantasy;
 }
 
@@ -15,7 +15,7 @@
     font-size: 1.4em;
     max-width: 50%;
     text-align: center;
-    color: azure;
+    color: oldlace;
 }
 
 
@@ -26,5 +26,25 @@
     font-size: 1.4em;
     max-width: 50%;
     text-align: center;
-    color: azure;
+    color: oldlace;
+}
+
+th {
+    margin-top: 70vh;
+    margin-bottom: 32.5vh;
+    margin-left: 25%;
+    font-size: 1.4em;
+    max-width: 50%;
+    text-align: center;
+    color: oldlace;
+}
+
+td {
+    margin-top: 70vh;
+    margin-bottom: 32.5vh;
+    margin-left: 25%;
+    font-size: 1.4em;
+    max-width: 50%;
+    text-align: center;
+    color: oldlace;
 }
