@@ -13,4 +13,5 @@ week eleven we are working on added the hiden history and description to each ra
 
 ## Second Semester
 Week one getting group back together and planing next faze<br>
-Week two researching how to add more roles and adding descriptions to races<br> 
+Week two researching how to add more roles and adding descriptions to races<br>
+Week three troubleshooting, adding descriptions to races and working on css<br>
