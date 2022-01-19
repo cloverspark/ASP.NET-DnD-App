@@ -1,7 +1,7 @@
 # ASP.NET-DnD-App
 
 ## Team Members
-Ammon & Alex
+Ammon & Alex & Matt
 ## Description
 This is a group project the two of use are going to work on during a semester while were in college and try to get a fully functioning DnD ASP.NET app working. 
  We hope you enjoy the app.
