@@ -2,6 +2,7 @@ using ASP.NET_DnD_App.Data;
 using ASP.NET_DnD_App.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using PC2.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,8 +15,8 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddTransient<IEmailProvider, SendGridEmailProvider>();
 
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+     .AddRoles<IdentityRole>() // Role support being added here
     .AddEntityFrameworkStores<ApplicationDbContext>();
-builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
 
@@ -43,5 +44,8 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 app.MapRazorPages();
+
+var serviceProvider = app.Services.GetRequiredService<IServiceProvider>().CreateScope();
+IdentityHelper.CreateRoles(serviceProvider.ServiceProvider, IdentityHelper.Admin).Wait();
 
 app.Run();
