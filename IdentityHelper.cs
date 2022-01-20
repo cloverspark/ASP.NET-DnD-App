@@ -5,6 +5,8 @@ namespace PC2.Data
     public static class IdentityHelper
     {
         public const string Admin = "Admin";
+        public const string DungeonMaster = "DungeonMaster";
+        public const string BasicPlayer = "BasicPlayer";
 
         internal static async Task CreateRoles(IServiceProvider provider, params string[] roles)
         {

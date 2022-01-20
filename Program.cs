@@ -47,5 +47,7 @@ app.MapRazorPages();
 
 var serviceProvider = app.Services.GetRequiredService<IServiceProvider>().CreateScope();
 IdentityHelper.CreateRoles(serviceProvider.ServiceProvider, IdentityHelper.Admin).Wait();
+IdentityHelper.CreateRoles(serviceProvider.ServiceProvider, IdentityHelper.DungeonMaster).Wait();
+IdentityHelper.CreateRoles(serviceProvider.ServiceProvider, IdentityHelper.BasicPlayer).Wait();
 
 app.Run();
