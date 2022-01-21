@@ -85,6 +85,10 @@ namespace ASP.NET_DnD_App.Areas.Identity.Pages.Account
             [Required]
             public string Username { get; set; }
 
+            // We do not need it to be required because the user only has valid option to choose from
+            [Display(Name = "Select Account Type")]
+            public int Role { get; set; }
+
             /// <summary>
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
@@ -131,7 +135,19 @@ namespace ASP.NET_DnD_App.Areas.Identity.Pages.Account
                     var userId = await _userManager.GetUserIdAsync(user);
 
                     // Assign user to selected role
-                    await _userManager.AddToRoleAsync(user, "BasicPlayer");
+                    string role = "";
+
+                    // Get the role name from the form
+                    if (Input.Role == 1)
+                    {
+                        role = "Basic Player";
+                    }
+
+                    else
+                    {
+                        role = "Dungeon Master";
+                    }
+                    await _userManager.AddToRoleAsync(user, role);
                      
                     var callbackUrl = Url.Page(
                         "/Account/ConfirmEmail",
