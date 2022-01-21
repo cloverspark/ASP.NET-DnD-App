@@ -32,13 +32,23 @@
         <br />
         <div data-aos="fade-up" data-aos-duration="1300">
             <div class="col-sm-3">
+                <label asp-for="Input.Role"></label>
+                <select asp-for="Input.Role" class="form-select form-select-md mb-3" aria-label=".form-select-lg example">
+                    <option value="1" selected>Basic Player</option>
+                    <option value="2">Dungeon Master</option>
+                </select>
+            </div>
+        </div>
+        <br />
+        <div data-aos="fade-up" data-aos-duration="1400">
+            <div class="col-sm-3">
                 <label asp-for="Input.Password"></label>
                 <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" />
                 <span asp-validation-for="Input.Password" class="text-danger"></span>
             </div>
         </div>
         <br />
-        <div data-aos="fade-up" data-aos-duration="1500">
+        <div data-aos="fade-up" data-aos-duration="1600">
             <div class="col-sm-3">
                 <label asp-for="Input.ConfirmPassword"></label>
                 <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" />
@@ -46,7 +56,7 @@
             </div>
         </div>
         <br />
-        <div data-aos="fade-up" data-aos-duration="1600">
+        <div data-aos="fade-up" data-aos-duration="1700">
         <div class="form-group">
             <input id="registerSubmit" type="submit" value="Register" class="btn btn-primary" />
         </div>
