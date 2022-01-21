@@ -129,8 +129,10 @@ namespace ASP.NET_DnD_App.Areas.Identity.Pages.Account
                     _logger.LogInformation("User created a new account with password.");
 
                     var userId = await _userManager.GetUserIdAsync(user);
-                    //var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-                    //code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code)); code = code, 
+
+                    // Assign user to selected role
+                    await _userManager.AddToRoleAsync(user, "BasicPlayer");
+                     
                     var callbackUrl = Url.Page(
                         "/Account/ConfirmEmail",
                         pageHandler: null,

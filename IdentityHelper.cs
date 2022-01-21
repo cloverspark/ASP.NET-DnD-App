@@ -14,10 +14,10 @@ namespace PC2.Data
 
             IdentityResult roleResult;
 
-            foreach(string role in roles) 
+            foreach(string role in roles) // Go through all the user roles
             {
                 bool doesRoleExist = await roleManager.RoleExistsAsync(role);
-                if (!doesRoleExist)
+                if (!doesRoleExist) // If the user role does not exist create it
                 {
                     roleResult = await roleManager.CreateAsync(new IdentityRole(role));
                 }
