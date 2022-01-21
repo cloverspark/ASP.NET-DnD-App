@@ -45,6 +45,8 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}");
 app.MapRazorPages();
 
+
+// Create user roles
 var serviceProvider = app.Services.GetRequiredService<IServiceProvider>().CreateScope();
 IdentityHelper.CreateRoles(serviceProvider.ServiceProvider, IdentityHelper.Admin).Wait();
 IdentityHelper.CreateRoles(serviceProvider.ServiceProvider, IdentityHelper.DungeonMaster).Wait();
