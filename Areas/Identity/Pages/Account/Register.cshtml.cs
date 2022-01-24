@@ -159,7 +159,7 @@ namespace ASP.NET_DnD_App.Areas.Identity.Pages.Account
                     string toEmail = Input.Email;
                     string fromEmail = "dndmanager.noreply@gmail.com";
                     string subject =  "DnD Account";
-                    string body = "Your Dungeons & Dragons character manger account has been successfully created! We hope you enjoy our website!";
+                    string body = "Your Dungeons & Dragons character manager account has been successfully created! We hope you enjoy our website!";
                     string htmlContent = "";
 
                     var response = await _emailProvider.SendEmailAsync(Input.Username, toEmail, fromEmail, subject, body, htmlContent);
