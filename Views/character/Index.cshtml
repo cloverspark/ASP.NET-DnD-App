@@ -4,10 +4,11 @@
 @model IEnumerable<FullCharacterSheet>
 @inject IHttpContextAccessor http
 
+<link href="~/css/charIndex.css" rel="stylesheet">
+
     @if(SignInManager.IsSignedIn(User))
     {
     <h1>Characters List</h1>
-
 
     <a asp-action="Create" asp-controller="Character">
         Add Character
