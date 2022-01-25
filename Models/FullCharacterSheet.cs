@@ -29,7 +29,6 @@ namespace ASP.NET_DnD_App.Models
         [Required]
         public string? RaceName { get; set; }
 
-        [Required]
-        public IdentityUser CharacterOwner { get; set; }
+        public IdentityUser? CharacterOwner { get; set; }
     }
 }
