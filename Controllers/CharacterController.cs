@@ -6,6 +6,8 @@ using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 using ASP.NET_DnD_App.Models;
 using ASP.NET_DnD_App.Data;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Http;
 
 namespace ASP.NET_DnD_App.Controllers
 {
@@ -13,9 +15,13 @@ namespace ASP.NET_DnD_App.Controllers
     {
         private readonly ApplicationDbContext _context;
 
-        public CharacterController(ApplicationDbContext context)
+        private readonly UserManager<IdentityUser> _userManager;
+
+
+        public CharacterController(ApplicationDbContext context, UserManager<IdentityUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
         // GET: CharacterController
         public async Task<IActionResult> Index(int? id)
@@ -25,20 +31,24 @@ namespace ASP.NET_DnD_App.Controllers
             const int PageSize = 8;
             ViewData["CurrentPage"] = pageNum;
 
-            int numProducts = await FullCharacterSheetDB.GetTotalCharactersAsync(_context);
-            int totalPages = (int)Math.Ceiling((double)numProducts / PageSize);
+            // Get current user
+            IdentityUser currentUser = await _userManager.GetUserAsync(User);
+
+            int numCharacters = await FullCharacterSheetDB.GetUsersTotalCharactersAsync(_context, currentUser);
+            int totalPages = (int)Math.Ceiling((double)numCharacters / PageSize);
             ViewData["MaxPage"] = totalPages;
 
-            List<FullCharacterSheet> products =
-                await FullCharacterSheetDB.GetCharactersAsync(_context, PageSize, pageNum);
+            List<FullCharacterSheet> characters =
+                await FullCharacterSheetDB.GetCharactersAsync(_context, PageSize, pageNum, currentUser);
 
             // Send list of products to view to be displayed
-            return View(products);
+            return View(characters);
         }
 
         // GET: CharacterController/Create
         public ActionResult Create()
         {
+            bool isva = ModelState.IsValid;
             return View();
         }
 
@@ -49,6 +59,12 @@ namespace ASP.NET_DnD_App.Controllers
         {
             if (ModelState.IsValid)
             {
+                // Get current user
+                IdentityUser currentUser = await _userManager.GetUserAsync(User);
+
+                // Assign character to current user
+                c.CharacterOwner = currentUser;
+
                 await FullCharacterSheetDB.AddCharacterAsync(_context, c);
 
                 TempData["Message"] = $"{c.CharacterName} was added successfully";
@@ -62,7 +78,10 @@ namespace ASP.NET_DnD_App.Controllers
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
-            FullCharacterSheet p = await FullCharacterSheetDB.GetCharacterAsync(_context, id);
+            // Get current user
+            IdentityUser currentUser = await _userManager.GetUserAsync(User);
+
+            FullCharacterSheet p = await FullCharacterSheetDB.GetCharacterAsync(_context, id, currentUser);
             // pass product to view
             return View(p);
         }
@@ -84,7 +103,10 @@ namespace ASP.NET_DnD_App.Controllers
         [HttpGet]
         public async Task<IActionResult> Delete(int id)
         {
-            FullCharacterSheet c = await FullCharacterSheetDB.GetCharacterAsync(_context, id);
+            // Get current user
+            IdentityUser currentUser = await _userManager.GetUserAsync(User);
+
+            FullCharacterSheet c = await FullCharacterSheetDB.GetCharacterAsync(_context, id, currentUser);
             return View(c);
         }
 
@@ -92,7 +114,10 @@ namespace ASP.NET_DnD_App.Controllers
         [ActionName("Delete")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            FullCharacterSheet c = await FullCharacterSheetDB.GetCharacterAsync(_context, id);
+            // Get current user
+            IdentityUser currentUser = await _userManager.GetUserAsync(User);
+
+            FullCharacterSheet c = await FullCharacterSheetDB.GetCharacterAsync(_context, id, currentUser);
 
             _context.Entry(c).State = EntityState.Deleted;
 
