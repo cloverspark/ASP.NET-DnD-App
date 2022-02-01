@@ -24,6 +24,8 @@ namespace ASP.NET_DnD_App.Controllers
             _userManager = userManager;
         }
         // GET: CharacterController
+
+        // Display current user's characters in pages of 8 (Each page will display 8 characters)
         public async Task<IActionResult> Index(int? id)
         {
             // https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/operators/null-coalescing-operator
@@ -34,12 +36,13 @@ namespace ASP.NET_DnD_App.Controllers
             // Get current user
             IdentityUser currentUser = await _userManager.GetUserAsync(User);
 
-            int numCharacters = await FullCharacterSheetDB.GetUsersTotalCharactersAsync(_context, currentUser);
-            int totalPages = (int)Math.Ceiling((double)numCharacters / PageSize);
-            ViewData["MaxPage"] = totalPages;
+            int numCharacters = await FullCharacterSheetDB.GetUsersTotalCharactersAsync(_context, currentUser); // Get the count of the current User's characters 
+            int totalPages = (int)Math.Ceiling((double)numCharacters / PageSize); // Davide the total number of characters by 8  
+            ViewData["MaxPage"] = totalPages; 
 
             List<FullCharacterSheet> characters =
-                await FullCharacterSheetDB.GetCharactersAsync(_context, PageSize, pageNum, currentUser);
+                await FullCharacterSheetDB.GetCharactersAsync(_context, PageSize, pageNum, currentUser); // Get a list of all the User's characters with the correct 
+                                                                                                         // amount to be displayed per page
 
             // Send list of products to view to be displayed
             return View(characters);
@@ -48,7 +51,6 @@ namespace ASP.NET_DnD_App.Controllers
         // GET: CharacterController/Create
         public ActionResult Create()
         {
-            bool isva = ModelState.IsValid;
             return View();
         }
 
@@ -65,7 +67,7 @@ namespace ASP.NET_DnD_App.Controllers
                 // Assign character to current user
                 c.CharacterOwner = currentUser;
 
-                await FullCharacterSheetDB.AddCharacterAsync(_context, c);
+                await FullCharacterSheetDB.AddCharacterAsync(_context, c); // Add character to database
 
                 TempData["Message"] = $"{c.CharacterName} was added successfully";
 
@@ -81,8 +83,9 @@ namespace ASP.NET_DnD_App.Controllers
             // Get current user
             IdentityUser currentUser = await _userManager.GetUserAsync(User);
 
-            FullCharacterSheet p = await FullCharacterSheetDB.GetCharacterAsync(_context, id, currentUser);
-            // pass product to view
+            FullCharacterSheet p = await FullCharacterSheetDB.GetCharacterAsync(_context, id, currentUser); // Get selected character
+
+            // Pass character to view
             return View(p);
         }
 
@@ -91,12 +94,14 @@ namespace ASP.NET_DnD_App.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Entry(c).State = EntityState.Modified;
-                await _context.SaveChangesAsync();
+                _context.Entry(c).State = EntityState.Modified; // Update selected character with what was entered on the form
+
+                await _context.SaveChangesAsync(); // Save changes to the database
 
                 ViewData["Message"] = "Character Sheet updated successfully";
             }
 
+            // Redirect to main character page
             return RedirectToAction("Index");
         }
 
@@ -104,9 +109,11 @@ namespace ASP.NET_DnD_App.Controllers
         public async Task<IActionResult> Delete(int id)
         {
             // Get current user
-            IdentityUser currentUser = await _userManager.GetUserAsync(User);
+            IdentityUser currentUser = await _userManager.GetUserAsync(User); 
 
-            FullCharacterSheet c = await FullCharacterSheetDB.GetCharacterAsync(_context, id, currentUser);
+            FullCharacterSheet c = await FullCharacterSheetDB.GetCharacterAsync(_context, id, currentUser); // Get selected character
+
+            // Return selected character to the current page
             return View(c);
         }
 
@@ -117,12 +124,13 @@ namespace ASP.NET_DnD_App.Controllers
             // Get current user
             IdentityUser currentUser = await _userManager.GetUserAsync(User);
 
-            FullCharacterSheet c = await FullCharacterSheetDB.GetCharacterAsync(_context, id, currentUser);
+            FullCharacterSheet c = await FullCharacterSheetDB.GetCharacterAsync(_context, id, currentUser); // Get selected character
 
-            _context.Entry(c).State = EntityState.Deleted;
+            _context.Entry(c).State = EntityState.Deleted; // Delete the selected character from database
 
-            await _context.SaveChangesAsync();
+            await _context.SaveChangesAsync(); // Save changes to the database
 
+            // Redirect to main character page
             return RedirectToAction("Index");
         }
     }
