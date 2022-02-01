@@ -14,7 +14,7 @@ namespace ASP.NET_DnD_App.Data
     public class FullCharacterSheetDB
     {
         /// <summary>
-        /// Returns the total count of FullCharacterSheet database wide
+        /// Returns the total count of FullCharacterSheet database wide. This method will only be used by Admins
         /// </summary>
         /// <param name="_context">Database context to use</param>
         public static async Task<int> GetTotalCharactersInDBAsync(ApplicationDbContext _context)
@@ -51,6 +51,12 @@ namespace ASP.NET_DnD_App.Data
                         .ToListAsync();
         }
 
+        /// <summary>
+        /// Add a character to the database
+        /// </summary>
+        /// <param name="_context"></param>
+        /// <param name="c">Newly created character</param>
+        /// <returns></returns>
         public static async Task<FullCharacterSheet> AddCharacterAsync(ApplicationDbContext _context, FullCharacterSheet c)
         { 
             // Add to DB
@@ -58,6 +64,14 @@ namespace ASP.NET_DnD_App.Data
             await _context.SaveChangesAsync();
             return c;
         }
+
+        /// <summary>
+        /// Get characters tide to the current user
+        /// </summary>
+        /// <param name="_context"></param>
+        /// <param name="CharacterSheetId"></param>
+        /// <param name="characterOwner"></param>
+        /// <returns></returns>
         public static async Task<FullCharacterSheet> GetCharacterAsync(ApplicationDbContext _context, int CharacterSheetId, IdentityUser characterOwner)
         {
             FullCharacterSheet c = await (from FullCharacterSheet in _context.FullCharacterSheet
