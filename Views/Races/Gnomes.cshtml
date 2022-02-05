@@ -18,28 +18,28 @@
   </thead>
   <tbody>
     <tr>
-      <td>Forest Gnomes</td>
+      <td><button id="hi" type="button" class="btn btn-link" onclick="ForestGnomesOnClick()">Forest Gnomes</button></td>
       <td>Common, Gnomish</td>
       <td>Small</td>
       <td>25</td>
       <td>2 INT, 1 DEX</td>
     </tr>
     <tr>
-      <td>Mark of Scribing Gnomes</td>
+      <td><button id="hi" type="button" class="btn btn-link" onclick="MarkofScribingGnomesOnClick()">Mark of Scribing Gnomes</button></td>
       <td>Common, Gnomish</td>
       <td>Small</td>
       <td>25</td>
       <td>2 INT, 1 CHA</td>
     </tr>
     <tr>
-      <td>Rock Gnomes</td>
+      <td><button id="hi" type="button" class="btn btn-link" onclick="RockGnomesOnClick()">Rock Gnomes</button></td>
       <td>Common, Gnomish</td>
       <td>Small</td>
       <td>25</td>
       <td>2 INT, 1 CON</td>
     </tr>
     <tr>
-      <td>Deep Gnomes</td>
+      <td><button id="hi" type="button" class="btn btn-link" onclick="DeepGnomesOnClick()">Deep Gnomes</button></td>
       <td>Common, Gnomish</td>
       <td>Small</td>
       <td>25</td>
@@ -50,3 +50,25 @@
 <!-- This is an empty P(paragraph) so descriptions can show up when linked subrace name clicked  -->
 <p style="display=none" class="Des" id="Des"></p>
 <!-- Each function is set for one sub race to give as brief description -->
+<script>
+    function ForestGnomesOnClick() {
+        var p = document.getElementById("Des");
+        p.innerText = "Forest Gnomes are among the least commonly seen. they rarely grow taller than 2½ feet in height or weigh over 30 lbs. they originated from the planet Toril on the continent Faerûn. These Gnomes are so timid they almost never leave their hidden homes";
+        p.style.display = "block";
+    }
+    function MarkofScribingGnomesOnClick() {
+        var p = document.getElementById("Des");
+        p.innerText = "This can be any type of Gnome. A Gnome who bears a Mark of Scribing is able to translate languages and communicate over a long distance. These Gnomes feel words as if they are a living beings.";
+        p.style.display = "block";
+    }
+    function RockGnomesOnClick() {
+        var p = document.getElementById("Des");
+        p.innerText = "Rock Gnomes are the most curious and seen Gnomes of all. These gnomes like to spend their lives by filling each and every day of their life with as much fun and enjoyment as possible. They are typically between 3 to 3½ ft tall and weighed anywhere from 40 to 45 pounds.Rock gnomes are comfortable deep underground just about as much as on the surface world, possessing trade skill in ore and gem-cutting that surpassed that of the dwarves. This made them not like large cities or town where the population got bigger than 500 due to the work Big Folk would ask of them";
+        p.style.display = "block";
+    }
+    function DeepGnomesOnClick() {
+        var p = document.getElementById("Des");
+        p.innerText = "Called svirfneblin in their native language, these Gnomes come from the Underdark.They survived in the Underdark by being wary of other races and keeping their society a secret.They rang from 3 ft to 3 ft 6 in (90–107 cm) in height and weighing between 40 and 45 lb.Due to where they live compared to other gnomes they do not have the affinity for cantrip-like abilities but have the ability darkvision. ";
+        p.style.display = "block";
+    }
+</script>
