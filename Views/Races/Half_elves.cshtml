@@ -18,42 +18,42 @@
   </thead>
   <tbody>
     <tr>
-      <td>Half-Aquatic</td>
+      <td><button id="hi" type="button" class="btn btn-link" onclick="HalfAquaticOnClick()">Half-Aquatic</button></td>
       <td>Common, Elvish</td>
       <td>Medium</td>
       <td>30</td>
       <td>2 CHA, 1 ASI</td>
     </tr>
     <tr>
-      <td>Half-Drow</td>
+      <td><button id="hi" type="button" class="btn btn-link" onclick="HalfDrowOnClick()">Half-Drow</button></td>
       <td>Common, Elvish</td>
       <td>Medium</td>
       <td>30</td>
       <td>2 CHA, 1 ASI</td>
     </tr>
     <tr>
-      <td>Half-High</td>
+      <td><button id="hi" type="button" class="btn btn-link" onclick="HalfHighOnClick()">Half-High</button></td>
       <td>Common, Elvish</td>
       <td>Medium</td>
       <td>30</td>
       <td>2 CHA, 1 ASI</td>
     </tr>
     <tr>
-      <td>Mark of Detection</td>
+      <td><button id="hi" type="button" class="btn btn-link" onclick="MarkofDetectionOnClick()">Mark of Detection</button></td>
       <td>Common, Elvish</td>
       <td>Medium</td>
       <td>30</td>
       <td>2 WIS, 1 ASI</td>
     </tr>
     <tr>
-      <td>Mark of Storm</td>
+      <td><button id="hi" type="button" class="btn btn-link" onclick="MarkofStormOnClick()">Mark of Storm</button>Mark of Storm</td>
       <td>Common, Elvish</td>
       <td>Medium</td>
       <td>30</td>
       <td>2 CHA, 1 DEX</td>
     </tr>
     <tr>
-      <td>Half-Wood-Elf</td>
+      <td><button id="hi" type="button" class="btn btn-link" onclick="HalfWoodElfOnClick()">Half-Wood-Elf</button></td>
       <td>Common, Elvish</td>
       <td>Medium</td>
       <td>30</td>
@@ -64,3 +64,35 @@
 <!-- This is an empty P(paragraph) so descriptions can show up when linked subrace name clicked  -->
 <p style="display=none" class="Des" id="Des"></p>
 <!-- Each function is set for one sub race to give as brief description -->
+<script>
+    function HalfAquaticOnClick() {
+        var p = document.getElementById("Des");
+        p.innerText = "Like many Half Elves these people don't really have a society of their own. This race is usually born from human and Sea Elf(Aquatic Elves) or Aquatic Elves and Aquatic Humans(Humans who breath and live underwater). These Half Elves often serve as the diplomats and negotiators for either their human or elf communities, depending on where they live.";
+        p.style.display = "block";
+    }
+    function HalfDrowOnClick() {
+        var p = document.getElementById("Des");
+        p.innerText = "This Half Elf is the offspring of one Human parent and one Drow parent.They generally had a dusky skin tone , silver or white hair, and human eye colors. Other than their hair, skin tone and darkvision they do not keep any of the Drow traits or talents. Most Half-drow can be linked back to the Ousstyl House which is the most well know Drow household to mate with humans. ";
+        p.style.display = "block";
+    }
+    function HalfHighOnClick() {
+        var p = document.getElementById("Des");
+        p.innerText = "This Half Elf is the offspring of a High Elf and a Human. These used to be the rarest of Half Elves but do to the changes in society they have became more accepted and common";
+        p.style.display = "block";
+    }
+    function MarkofDetectionOnClick() {
+        var p = document.getElementById("Des");
+        p.innerText = "This can be any type of Half Elf. Mark of Detection is an inquisitive’s dream. This mark lets users see others intent(Evil or Good), check for traps and study the energies of magic. The mark belongs to the Medani household.";
+        p.style.display = "block";
+    }
+    function MarkofStormOnClick() {
+        var p = document.getElementById("Des");
+        p.innerText = "Half Elves with this mark have a Boon to increase their resistance to lightning damage. This mark belongs to the Lyrandar household. Some Half Elves with this mark have even learned to harness the power storms themselves";
+        p.style.display = "block";
+    }
+    function HalfWoodElfOnClick() {
+        var p = document.getElementById("Des");
+        p.innerText = "This Type of Half Elves are most commonly the children of a Human and Wood Elf but can also be from a mix between two elven races. When the parents are two different elvish races the wood elf genetics are dominant.";
+        p.style.display = "block";
+    }
+</script>
