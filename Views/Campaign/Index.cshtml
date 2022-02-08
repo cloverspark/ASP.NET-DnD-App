@@ -4,10 +4,15 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>View Your Campaign Members</h1>
+<br />
+<br />
+<a class="nav-link" asp-area="" asp-controller="Campaign" asp-action="InvitePlayer">Invite Player</a>
+<br />
+<a class="nav-link" asp-area="" asp-controller="Campaign" asp-action="DeletePlayer">Delete Player</a>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    @*<a asp-action="Create">Create New</a>*@
 </p>
 <table class="table">
 

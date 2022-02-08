@@ -1,0 +1,20 @@
+﻿@model ASP.NET_DnD_App.Models.CampaignPlayers
+
+@{
+    ViewData["Title"] = "DeletePlayer";
+}
+
+<h1>Delete Player From Campaign</h1>
+
+<div>
+    <h4>Campaign Player</h4>
+    <hr />
+    <dl class="row">
+    </dl>
+    
+    <form asp-action="DeletePlayer">
+        <input type="hidden" asp-for="PlayerId" />
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <a asp-action="Index">Back to List</a>
+    </form>
+</div>
