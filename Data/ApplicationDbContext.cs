@@ -13,5 +13,11 @@ namespace ASP.NET_DnD_App.Data
         }
 
         public DbSet<Models.FullCharacterSheet> FullCharacterSheet {  get; set;}
+
+        public DbSet<Models.CampaignInvites> CampaignInvites { get; set;}
+
+        public DbSet<Models.Campaigns> Campaigns { get; set;}
+
+        public DbSet<Models.CampaignPlayers> CampaignPlayers { get; set; } 
     }  
 }
