@@ -7,11 +7,11 @@ namespace ASP.NET_DnD_App.Models
     {
         [Key]
         [Required]
-        public int PlayerId { get; set; }
+        public int PlayerId { get; set; } 
 
         [Required]
-        public Campaigns CampaignsId { get; set; }
+        public Campaigns CampaignId { get; set; } // Link to a hosted campaign in Campaign table
 
-        public IdentityUser BasicPlayer { get; set; }
+        public IdentityUser BasicPlayer { get; set; } // Player that belongs to a campaign
     }
 }
