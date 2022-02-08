@@ -1,0 +1,38 @@
+﻿@model ASP.NET_DnD_App.Models.CampaignInvites
+
+@{
+    ViewData["Title"] = "InvitePlayer";
+}
+
+<h1>Invite Player to Your Campaign</h1>
+
+<h4>Campaign Invites Mock Up (This was auto generated)</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="InvitePlayer">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="InviteCode" class="control-label"></label>
+                <input asp-for="InviteCode" class="form-control" />
+                <span asp-validation-for="InviteCode" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="InvitedPlayerUserName" class="control-label"></label>
+                <input asp-for="InvitedPlayerUserName" class="form-control" />
+                <span asp-validation-for="InvitedPlayerUserName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
