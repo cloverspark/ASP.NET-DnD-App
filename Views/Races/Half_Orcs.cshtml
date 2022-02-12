@@ -18,14 +18,33 @@
   </thead>
   <tbody>
     <tr>
-      <td>Mark of Finding</td>
+      <td><button id="hi" type="button" class="btn btn-link" onclick="MarkofFindingOnClick()">Mark of Finding</button></td>
       <td>Common, Orc</td>
       <td>Medium</td>
       <td>30</td>
       <td>2 WIS, 1 CON</td>
+    </tr>
+    <tr>
+      <td><button id="hi" type="button" class="btn btn-link" onclick="HalfOrcOnClick()">Half-Orc</button></td>
+      <td>Common, Orc</td>
+      <td>Medium</td>
+      <td>30</td>
+      <td>2 STR, 1 CON</td>
     </tr>
 </tbody>
 </table>
 <!-- This is an empty P(paragraph) so descriptions can show up when linked subrace name clicked  -->
 <p style="display=none" class="Des" id="Des"></p>
 <!-- Each function is set for one sub race to give as brief description -->
+<script>
+    function MarkofFindingOnClick() {
+        var p = document.getElementById("Des");
+        p.innerText = "This is a Half Orc of any type who wears the mark of finding. This mark make you an excellent hunter. That is due to the  marks ability to guiding the hunter to prey. This mark belongs to the house of Tharashk.";
+        p.style.display = "block";
+    }
+    function HalfOrcOnClick() {
+        var p = document.getElementById("Des");
+        p.innerText = "This is a race usually make from when one Orc parent forces themselves on to any other race. This race is usually evil and got for warrior or Martial Arts classes. Half-orcs’ have a grayish pigmentation, sloping foreheads, jutting jaws, prominent teeth, and towering builds make their orcish heritage plain for all to see. Half-orcs stand between 5 and 7 feet tall and usually weigh between 180 and 250 pounds.";
+        p.style.display = "block";
+    }
+</script>
