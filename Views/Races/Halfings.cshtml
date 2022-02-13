@@ -18,42 +18,42 @@
   </thead>
   <tbody>
     <tr>
-      <td>Ghostwise Halfing</td>
+      <td><button id="hi" type="button" class="btn btn-link" onclick="GhostwiseHalfingOnClick()">Ghostwise Halfing</button></td>
       <td>Common, Halfling</td>
       <td>Small</td>
       <td>25</td>
       <td>2 DEX, 1 WIS</td>
     </tr>
     <tr>
-      <td>Lightfoot Halfing</td>
+      <td><button id="hi" type="button" class="btn btn-link" onclick="LightfoothalflingsOnClick</OnClick()">Lightfoot Halfing</button></td>
       <td>Common, Halfling</td>
       <td>Small</td>
       <td>25</td>
       <td>2 DEX, 1 CHA</td>
     </tr>
     <tr>
-      <td>Lotusden Halfing</td>
+      <td><button id="hi" type="button" class="btn btn-link" onclick="LotusdenHalfingOnClick()">Lotusden Halfing</button></td>
       <td>Common, Halfling</td>
       <td>Small</td>
       <td>25</td>
       <td>2 DEX, 1 WIS</td>
     </tr>
     <tr>
-      <td>Mark of Healing Halfing</td>
+      <td><button id="hi" type="button" class="btn btn-link" onclick="MarkofHealingHalfingOnClick()">Mark of Healing Halfing</button></td>
       <td>Common, Halfling</td>
       <td>Small</td>
       <td>25</td>
       <td>2 DEX, 1 WIS</td>
     </tr>
     <tr>
-      <td>Mark of Hospitality Halfing</td>
+      <td><button id="hi" type="button" class="btn btn-link" onclick="MarkofHospitality HalfingOnClick()">Mark of Hospitality Halfing</button></td>
       <td>Common, Halfling</td>
       <td>Small</td>
       <td>25</td>
       <td>2 DEX, 1 CHA</td>
     </tr>
     <tr>
-      <td>Stout Halfing</td>
+      <td><button id="hi" type="button" class="btn btn-link" onclick="StoutHalfingOnClick()">Stout Halfing</button></td>
       <td>Common, Halfling</td>
       <td>Small</td>
       <td>25</td>
@@ -64,3 +64,35 @@
 <!-- This is an empty P(paragraph) so descriptions can show up when linked subrace name clicked  -->
 <p style="display=none" class="Des" id="Des"></p>
 <!-- Each function is set for one sub race to give as brief description -->
+<script>
+    function GhostwiseHalfingOnClick() {
+        var p = document.getElementById("Des");
+        p.innerText = "Ghostwise halflings are the most uncommon of the three major halfling subraces. This race is very clan and family originated to the point some say they are obsessed. This race has a unique ability to communicate telepathically with any creature within 30 feet of them that spoke the same language.";
+        p.style.display = "block";
+    }
+    function LightfoothalflingsOnClick() {
+        var p = document.getElementById("Des");
+        p.innerText = "Lightfoot halflings are the most common type of halflings seen in the world. That is do to their wanderlust always wanting to go on an adventure.";
+        p.style.display = "block";
+    }
+    function LotusdenHalfingOnClick() {
+        var p = document.getElementById("Des");
+        p.innerText = "This race adapted to live synergistically with the chaotic laws of the wilds. Their origin is kind of shrouded in mystery and even with that this race doesn't seem to care. They just are like a Lightfoot halflings just not as nice.";
+        p.style.display = "block";
+    }
+    function MarkofHealingHalfingOnClick() {
+        var p = document.getElementById("Des");
+        p.innerText = "This is a Halfing who bears the Mark of Healing. As said in the name this mark is used for healing. Using the mark they can save a life with a touch, restoring vitality and the will power. When dealing with mundane alchemy, the mark helps its bearer sense the nature of maladies, aiding them in finding a cure. This mark belongs to the household of Jorasco.";
+        p.style.display = "block";
+    }
+    function MarkofHospitality() {
+        var p = document.getElementById("Des");
+        p.innerText = "Mark of Hospitality Halfing is a person who bring a positive vibe and good feeling with them. That is due to the marks ability to keep a place clean, and to heat, chill, and season food due to those abilities many times they become innkeepers. This mark belongs to the house of Ghallanda.";
+        p.style.display = "block";
+    }
+    function StoutHalfingOnClick() {
+        var p = document.getElementById("Des");
+        p.innerText = "Stout Halfing have a sedentary and agricultural lifestyle. They choose to live in the wetlands due to other races not wanting to live there. Due to their upbring Stout Halfing are resistant to poison and get a saving throw against it. They also get a proficiency with aquatic vehicles and muddy or wetlands don't count against you as difficult terrain.";
+        p.style.display = "block";
+    }
+</script>
