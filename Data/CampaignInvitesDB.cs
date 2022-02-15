@@ -27,6 +27,30 @@ namespace ASP.NET_DnD_App.Data
         }
 
         /// <summary>
+        /// Get an invite with the invite code
+        /// </summary>
+        /// <param name="_context"></param>
+        /// <param name="inviteCode"></param>
+        /// <returns></returns>
+        public static async Task<CampaignInvites> GetInvite(ApplicationDbContext _context, int inviteCode)
+        {
+            try
+            {                           // Ask why I have to do this to get DungeonMaster
+                IdentityUser person = await (from CampaignInvites in _context.CampaignInvites
+                                             where CampaignInvites.InviteCode == inviteCode
+                                             select CampaignInvites.DungeonMaster).SingleAsync();
+                CampaignInvites campaign = await (from CampaignInvites in _context.CampaignInvites
+                                                  where CampaignInvites.InviteCode == inviteCode
+                                                  select CampaignInvites).SingleAsync();
+                return campaign;
+            }
+            catch(InvalidOperationException) // If there is no invite with that code return null
+            {
+                return null;
+            }
+        }
+
+        /// <summary>
         /// Get the number of invites tied to the current BasicPlayer
         /// </summary>
         /// <param name="_context"></param>
@@ -39,30 +63,6 @@ namespace ASP.NET_DnD_App.Data
                                                     select CampaignInvites).CountAsync();
 
             return invites;
-        }
-
-        /// <summary>
-        /// Check if targeted basic player is in a campaign
-        /// </summary>
-        /// <param name="_context"></param>
-        /// <param name="basicPlayer"></param>
-        /// <returns>true if BasicPlayer is already in a campaign and return false if not in a campaign</returns>
-        public static async Task<bool> IsInCampaign(ApplicationDbContext _context, IdentityUser basicPlayer)
-        {
-             int participatingCampaigns = await (from CampaignPlayers in _context.CampaignPlayers
-                                                where CampaignPlayers.BasicPlayer == basicPlayer
-                                                select CampaignPlayers).CountAsync();
-
-            // BasicPlayer is only allowed to participate in 1 campaign at a time
-            if(participatingCampaigns > 0)
-            {
-                return true;
-            }
-
-            else // If participatingCampaigns is < 1, it means that the BasicPlayer is not in a campagin
-            {
-                return false;
-            }
         }
     }
 }

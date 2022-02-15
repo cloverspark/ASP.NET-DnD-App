@@ -76,7 +76,7 @@ namespace ASP.NET_DnD_App.Data
         {
             FullCharacterSheet c = await (from FullCharacterSheet in _context.FullCharacterSheet
                                           where FullCharacterSheet.CharacterSheetId == CharacterSheetId
-                                          && FullCharacterSheet.CharacterOwner == characterOwner // Only get characters the belong to the owner
+                                          && FullCharacterSheet.CharacterOwner == characterOwner // Only get characters that belong to the owner
                                           select FullCharacterSheet).SingleAsync();
             return c;
         }

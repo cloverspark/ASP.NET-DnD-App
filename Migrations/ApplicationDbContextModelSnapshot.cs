@@ -58,14 +58,12 @@ namespace ASP.NET_DnD_App.Migrations
                     b.Property<string>("BasicPlayerId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("CampaignId1")
+                    b.Property<int>("CampaignId")
                         .HasColumnType("int");
 
                     b.HasKey("PlayerId");
 
                     b.HasIndex("BasicPlayerId");
-
-                    b.HasIndex("CampaignId1");
 
                     b.ToTable("CampaignPlayers");
                 });
@@ -352,15 +350,7 @@ namespace ASP.NET_DnD_App.Migrations
                         .WithMany()
                         .HasForeignKey("BasicPlayerId");
 
-                    b.HasOne("ASP.NET_DnD_App.Models.Campaigns", "CampaignId")
-                        .WithMany()
-                        .HasForeignKey("CampaignId1")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("BasicPlayer");
-
-                    b.Navigation("CampaignId");
                 });
 
             modelBuilder.Entity("ASP.NET_DnD_App.Models.Campaigns", b =>

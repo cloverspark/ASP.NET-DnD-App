@@ -98,7 +98,7 @@ namespace ASP.NET_DnD_App.Controllers
                 invite.DungeonMaster = currentUser;
 
                 // Check if BasicPlayer is already part of a campaign
-                bool inCampaign = await CampaignInvitesDB.IsInCampaign(_context, basicPlayer);
+                bool inCampaign = await CampaignDB.IsInCampaign(_context, basicPlayer);
 
                 if (inCampaign)
                 {
@@ -143,8 +143,48 @@ namespace ASP.NET_DnD_App.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult AcceptInvite(InviteCode inviteCode) 
+        public async Task<IActionResult> AcceptInviteAsync(InviteCode inviteCode) 
         {
+            if (ModelState.IsValid)
+            {
+                // Get current user
+                IdentityUser currentUser = await _userManager.GetUserAsync(User);
+
+                // Get targeted invite
+                CampaignInvites targetedInvite = await CampaignInvitesDB.GetInvite(_context, inviteCode.Code);
+
+                if(targetedInvite == null) // if true, there is no campaign with the entered inviteCade
+                {
+                    ViewData["Invite"] = "Could not find a campaign with that invite code. Check invite code and try again.";
+
+                    return View();
+                }
+
+#pragma warning disable CS8602 // Dereference of a possibly null reference.
+                else if(!targetedInvite.InvitedPlayerUserName.Equals(currentUser.UserName))
+#pragma warning restore CS8602 // Dereference of a possibly null reference.
+                {
+                    ViewData["NotInvited"] = "You were not invited to this campaign!";
+                    return View();
+                }
+
+                else
+                {
+                    // Add the player to the campaign
+
+                    // Get the desired campaign
+                    Campaigns campaign = await CampaignDB.GetCampaign(_context, targetedInvite.DungeonMaster);
+
+                    // Add player to campaign
+                    CampaignPlayers campaignPlayer = await CampaignDB.JoinCampaign(_context, campaign, currentUser);
+
+                    // Delete the invite from database
+                    _context.Entry(targetedInvite).State = EntityState.Deleted; 
+
+                    await _context.SaveChangesAsync(); // Save changes to the database
+                }
+            }
+
             return View();
         }
     }
