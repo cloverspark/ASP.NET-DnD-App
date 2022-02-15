@@ -9,13 +9,10 @@ namespace ASP.NET_DnD_App.Models
     public class CampaignInvites
     {
         [Key]
-        [Required]
         public int InviteId { get; set; }
 
-        [Required]
-        public IdentityUser DungeonMaster { get; set; } // Dungeon master of the campaign
+        public IdentityUser? DungeonMaster { get; set; } // Dungeon master of the campaign
 
-        [Required]
         public int InviteCode { get; set; } // Use this code to join a game. It is only used to let invited people to the campaign
 
         [Required]

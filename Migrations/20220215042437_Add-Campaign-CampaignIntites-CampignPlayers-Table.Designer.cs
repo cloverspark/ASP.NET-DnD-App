@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ASP.NET_DnD_App.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220208190418_Add-CampaignInvites-Campaigns-CampaignPlayers-Tables")]
-    partial class AddCampaignInvitesCampaignsCampaignPlayersTables
+    [Migration("20220215042437_Add-Campaign-CampaignIntites-CampignPlayers-Table")]
+    partial class AddCampaignCampaignIntitesCampignPlayersTable
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -33,7 +33,6 @@ namespace ASP.NET_DnD_App.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("InviteId"), 1L, 1);
 
                     b.Property<string>("DungeonMasterId")
-                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("InviteCode")
@@ -61,14 +60,12 @@ namespace ASP.NET_DnD_App.Migrations
                     b.Property<string>("BasicPlayerId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("CampaignsIdCampaignId")
+                    b.Property<int>("CampaignId")
                         .HasColumnType("int");
 
                     b.HasKey("PlayerId");
 
                     b.HasIndex("BasicPlayerId");
-
-                    b.HasIndex("CampaignsIdCampaignId");
 
                     b.ToTable("CampaignPlayers");
                 });
@@ -344,9 +341,7 @@ namespace ASP.NET_DnD_App.Migrations
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "DungeonMaster")
                         .WithMany()
-                        .HasForeignKey("DungeonMasterId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("DungeonMasterId");
 
                     b.Navigation("DungeonMaster");
                 });
@@ -357,15 +352,7 @@ namespace ASP.NET_DnD_App.Migrations
                         .WithMany()
                         .HasForeignKey("BasicPlayerId");
 
-                    b.HasOne("ASP.NET_DnD_App.Models.Campaigns", "CampaignsId")
-                        .WithMany()
-                        .HasForeignKey("CampaignsIdCampaignId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("BasicPlayer");
-
-                    b.Navigation("CampaignsId");
                 });
 
             modelBuilder.Entity("ASP.NET_DnD_App.Models.Campaigns", b =>

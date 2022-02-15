@@ -4,7 +4,7 @@
 
 namespace ASP.NET_DnD_App.Migrations
 {
-    public partial class AddCampaignInvitesCampaignsCampaignPlayersTables : Migration
+    public partial class AddCampaignCampaignIntitesCampignPlayersTable : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -14,7 +14,7 @@ namespace ASP.NET_DnD_App.Migrations
                 {
                     InviteId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    DungeonMasterId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    DungeonMasterId = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     InviteCode = table.Column<int>(type: "int", nullable: false),
                     InvitedPlayerUserName = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
@@ -25,8 +25,26 @@ namespace ASP.NET_DnD_App.Migrations
                         name: "FK_CampaignInvites_AspNetUsers_DungeonMasterId",
                         column: x => x.DungeonMasterId,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "CampaignPlayers",
+                columns: table => new
+                {
+                    PlayerId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CampaignId = table.Column<int>(type: "int", nullable: false),
+                    BasicPlayerId = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CampaignPlayers", x => x.PlayerId);
+                    table.ForeignKey(
+                        name: "FK_CampaignPlayers_AspNetUsers_BasicPlayerId",
+                        column: x => x.BasicPlayerId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -48,31 +66,6 @@ namespace ASP.NET_DnD_App.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "CampaignPlayers",
-                columns: table => new
-                {
-                    PlayerId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    CampaignsIdCampaignId = table.Column<int>(type: "int", nullable: false),
-                    BasicPlayerId = table.Column<string>(type: "nvarchar(450)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_CampaignPlayers", x => x.PlayerId);
-                    table.ForeignKey(
-                        name: "FK_CampaignPlayers_AspNetUsers_BasicPlayerId",
-                        column: x => x.BasicPlayerId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_CampaignPlayers_Campaigns_CampaignsIdCampaignId",
-                        column: x => x.CampaignsIdCampaignId,
-                        principalTable: "Campaigns",
-                        principalColumn: "CampaignId",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
             migrationBuilder.CreateIndex(
                 name: "IX_CampaignInvites_DungeonMasterId",
                 table: "CampaignInvites",
@@ -82,11 +75,6 @@ namespace ASP.NET_DnD_App.Migrations
                 name: "IX_CampaignPlayers_BasicPlayerId",
                 table: "CampaignPlayers",
                 column: "BasicPlayerId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_CampaignPlayers_CampaignsIdCampaignId",
-                table: "CampaignPlayers",
-                column: "CampaignsIdCampaignId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Campaigns_DungeonMasterId",
