@@ -130,8 +130,14 @@ namespace ASP.NET_DnD_App.Controllers
                 {
                     // If the email was successfully sent, add the invite to the database
                     await CampaignInvitesDB.SendInvite(_context, invite);
+
+                    ViewData["InviteStatus"] = $"Invite was successfully sent to {invite.InvitedPlayerUserName}";
+
+                    return View("Index");
                 }
             }
+
+            // If we got this far redisplay form
             return View();
         }
 
