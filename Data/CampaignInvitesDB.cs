@@ -26,6 +26,13 @@ namespace ASP.NET_DnD_App.Data
             return invite;
         }
 
+        public static async Task<List<CampaignInvites>> GetAllCampaignInvites(ApplicationDbContext _context, IdentityUser dungeonMaster)
+        {
+            return await (from CampaignInvites in _context.CampaignInvites
+                          where CampaignInvites.DungeonMaster == dungeonMaster
+                          select CampaignInvites).ToListAsync();
+        }
+
         /// <summary>
         /// Get an invite with the invite code
         /// </summary>
