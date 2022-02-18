@@ -21,9 +21,16 @@ namespace ASP.NET_DnD_App.Controllers
             _emailProvider = emailProvider;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> IndexAsync()
         {
-            return View();
+            // Get the current user
+            IdentityUser currentUser = await _userManager.GetUserAsync(User);
+
+            // Get all invites that were sent from the current DungeonMaster
+            List<CampaignInvites> sentInvites = await CampaignInvitesDB.GetCampaignInvites(_context, currentUser);
+
+            // Return all the invite to the view
+            return View(sentInvites);
         }
 
         [HttpGet]
