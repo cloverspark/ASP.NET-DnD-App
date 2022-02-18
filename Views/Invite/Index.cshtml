@@ -1,8 +1,6 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@using ASP.NET_DnD_App.Models
+@inject IHttpContextAccessor http
+@model IEnumerable<CampaignInvites>
 
 <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
   <symbol id="check-circle-fill" fill="currentColor" viewBox="0 0 16 16">
@@ -39,6 +37,25 @@
 <br />
 <a class="nav-link" asp-area="" asp-controller="Invite" asp-action="AcceptInvite">Enter Invite Code</a><br />
 
-<table class="table"> <!--This will display all the Dungeon Masters's campaign invites-->
-
-</table>
+<div class="table-responsive">
+    <table class="table table-hover table-striped">
+        <thead>
+            <tr>
+                <th>Username</th>
+                <th>Invite Code</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(CampaignInvites invites in Model)
+            {
+                <tr>
+                    <td>@invites.InvitedPlayerUserName</td>
+                    <td>@invites.InviteCode</td><td>
+                            <a class="btn btn-secondary" asp-route-id="@invites.InvitedPlayerUserName" asp-action="ResendInvite">Resend</a>
+                            <a class="btn btn-danger" asp-route-id="@invites.InvitedPlayerUserName" asp-action="Delete">Delete</a> 
+                        </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
