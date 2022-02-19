@@ -1,4 +1,14 @@
-﻿body {
+﻿header {
+    background-color: gray;
+    opacity: 0.8;
+}
+
+footer {
+    background-color: gray;
+    opacity: 0.8;
+}
+
+body {
     background-image: url(../Photos/DnD-BackgroundImage.jpg);
     background-position: center center;
     background-repeat: no-repeat;
@@ -6,6 +16,7 @@
     background-size: cover;
     min-height: 100%;
     color: azure;
+    font-family:fantasy;
 }
 
 .top-content {
@@ -25,3 +36,4 @@
     max-width: 50%;
     text-align: center;
 }
+

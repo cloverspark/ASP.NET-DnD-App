@@ -9,7 +9,7 @@ footer {
 }
 
 body {
-    background-image: url(../Photos/dnd.jpg);
+    background-image: url(../Photos/dnd2.jpg);
     background-position: center center;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -36,7 +36,6 @@ body {
     font-size: 1.4em;
     max-width: 50%;
     text-align: center;
-    color:azure;
 }
 
 td {
@@ -49,14 +48,14 @@ td {
 }
 
 tbody {
-    opacity: 0.9;
+    opacity: 0.8;
     margin-top: 70vh;
     margin-bottom: 32.5vh;
     margin-left: 25%;
     font-size: 1.4em;
     max-width: 50%;
     text-align: center;
-    background-color:gray;
+    background-color: sandybrown;
 }
 
 thead {
@@ -66,5 +65,5 @@ thead {
     font-size: 1.4em;
     max-width: 50%;
     text-align: center;
-    color:azure;
+    color: azure;
 }
