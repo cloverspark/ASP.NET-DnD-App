@@ -5,16 +5,15 @@
     background-attachment: fixed;
     background-size: cover;
     min-height: 100%;
-    color: azure;
 }
 
-.top-content {
+top-content {
     margin-top: 32vh;
     margin-left: 25%;
     font-size: 1.4em;
     max-width: 50%;
     text-align: center;
-    color: azure;
+    color: darkblue;
 }
 
 
