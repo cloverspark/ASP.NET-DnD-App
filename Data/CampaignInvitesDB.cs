@@ -58,6 +58,19 @@ namespace ASP.NET_DnD_App.Data
         }
 
         /// <summary>
+        /// Get an invite from the invited BasicPlayer's username
+        /// </summary>
+        /// <param name="_context"></param>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        public static async Task<CampaignInvites> GetInviteByName(ApplicationDbContext _context, string name)
+        {
+            return await (from CampaignInvites in _context.CampaignInvites
+                          where CampaignInvites.InvitedPlayerUserName == name
+                          select CampaignInvites).SingleAsync();
+        }
+
+        /// <summary>
         /// Get the number of invites tied to the current BasicPlayer
         /// </summary>
         /// <param name="_context"></param>
