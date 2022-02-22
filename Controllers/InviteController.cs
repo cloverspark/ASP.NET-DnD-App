@@ -183,15 +183,28 @@ namespace ASP.NET_DnD_App.Controllers
         }
 
         [HttpGet]
-        public IActionResult DeletePlayer() // Delete BasicPlayer from campaign
+        public async Task<IActionResult> DeleteInvite(int inviteCode) // Delete BasicPlayer from campaign
         {
-            return View();
+            // Get the selected invite to delete
+            CampaignInvites invite = await CampaignInvitesDB.GetInvite(_context, inviteCode);
+
+            // Return the invite to display is
+            return View(invite);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult DeletePlayerConfirmed()
+        [ActionName("Delete")]
+        public async Task<IActionResult> DeleteInviteConfirmed(int inviteCode)
         {
+            // Get the selected invite to delete
+            CampaignInvites invite = await CampaignInvitesDB.GetInvite(_context, inviteCode);
+
+            _context.Entry(invite).State = EntityState.Deleted; // Delete the selected invite from database
+
+            // Save changes to the db
+            await _context.SaveChangesAsync();
+
             return RedirectToAction("Index");
         }
     }

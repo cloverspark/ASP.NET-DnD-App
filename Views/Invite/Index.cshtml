@@ -46,13 +46,13 @@
             </tr>
         </thead>
         <tbody>
-            @foreach(CampaignInvites invites in Model)
+            @foreach(CampaignInvites invite in Model)
             {
                 <tr>
-                    <td>@invites.InvitedPlayerUserName</td>
-                    <td>@invites.InviteCode</td><td>
-                            <a class="btn btn-secondary" asp-route-id="@invites.InvitedPlayerUserName" asp-action="ResendInvite">Resend</a>
-                            <a class="btn btn-danger" asp-route-id="@invites.InvitedPlayerUserName" asp-action="Delete">Delete</a> 
+                    <td>@invite.InvitedPlayerUserName</td>
+                    <td>@invite.InviteCode</td><td>
+                            <a class="btn btn-secondary" asp-route-id="@invite.InviteCode" asp-action="ResendInvite">Resend</a>
+                            <a class="btn btn-danger" asp-route-id="@invite.InviteCode" asp-action="DeleteInvite">Delete</a> 
                         </td>
                 </tr>
             }
