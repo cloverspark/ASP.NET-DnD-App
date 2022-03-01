@@ -5,28 +5,28 @@
 }
 
 <div data-aos="fade-up" data-aos-duration="1000">
-    <h1>Are you sure you want to delete @Model.InvitedPlayerUserName?</h1>
+    <h1>Are you sure you want to delete an invite sent to @Model.InvitedPlayerUserName?</h1>
 </div>
 
 <div>
+    <hr />
     <div data-aos="fade-up" data-aos-duration="1800">
         <dl class="row">
             <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.InvitedPlayerUserName)
+                @Html.DisplayNameFor(model => model.InviteCode)
             </dt>
         </dl>
     </div>
-        <form asp-action="Delete">
-            <div data-aos="fade-up" data-aos-duration="2600">
-            <input type="submit" value="Delete" class="btn btn-danger" />
+
+    <form asp-action="DeleteInvite">
+        <div data-aos="fade-up" data-aos-duration="2600">
+            <input asp-route-InvitedPlayerUserName="@Model.InvitedPlayerUserName" type="submit" value="Delete" class="btn btn-danger" />
         </div>
         <br />
         <br />
         <div data-aos="fade-up" data-aos-duration="2800">
             <a asp-action="Index">Back to List</a>
         </div>
-        <br />
-        <br />
     </form>
 </div>
 
