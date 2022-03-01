@@ -19,14 +19,14 @@ namespace ASP.NET_DnD_App.Data
         /// <param name="_context"></param>
         /// <param name="invite">contains dungeonMaster, invite code, and targeted BasicPlayer</param>
         /// <returns>the successfully sent invite</returns>
-        public static async Task<CampaignInvites> SendInvite(ApplicationDbContext _context, CampaignInvites invite)
+        public static async Task<CampaignInvites> SendInviteAsync(ApplicationDbContext _context, CampaignInvites invite)
         {
             _context.CampaignInvites.Add(invite);
             await _context.SaveChangesAsync();
             return invite;
         }
 
-        public static async Task<List<CampaignInvites>> GetCampaignInvites(ApplicationDbContext _context, IdentityUser dungeonMaster)
+        public static async Task<List<CampaignInvites>> GetCampaignInvitesAsync(ApplicationDbContext _context, IdentityUser dungeonMaster)
         {
             return await (from CampaignInvites in _context.CampaignInvites
                           where CampaignInvites.DungeonMaster == dungeonMaster
@@ -39,7 +39,7 @@ namespace ASP.NET_DnD_App.Data
         /// <param name="_context"></param>
         /// <param name="inviteCode"></param>
         /// <returns></returns>
-        public static async Task<CampaignInvites> GetInvite(ApplicationDbContext _context, int inviteCode)
+        public static async Task<CampaignInvites> GetInviteAsync(ApplicationDbContext _context, int inviteCode)
         {
             try
             {                           // Ask why I have to do this to get DungeonMaster
@@ -63,7 +63,7 @@ namespace ASP.NET_DnD_App.Data
         /// <param name="_context"></param>
         /// <param name="name"></param>
         /// <returns></returns>
-        public static async Task<CampaignInvites> GetInviteByName(ApplicationDbContext _context, string name)
+        public static async Task<CampaignInvites> GetInviteByNameAsync(ApplicationDbContext _context, string name)
         {
             return await (from CampaignInvites in _context.CampaignInvites
                           where CampaignInvites.InvitedPlayerUserName == name
@@ -76,7 +76,7 @@ namespace ASP.NET_DnD_App.Data
         /// <param name="_context"></param>
         /// <param name="basicplayer"></param>
         /// <returns>found invites</returns>
-        public static async Task<int> HasInvite(ApplicationDbContext _context, IdentityUser basicplayer)
+        public static async Task<int> HasInviteAsync(ApplicationDbContext _context, IdentityUser basicplayer)
         {
             int invites = await (from CampaignInvites in _context.CampaignInvites
                                                     where CampaignInvites.InvitedPlayerUserName == basicplayer.UserName

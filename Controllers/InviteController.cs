@@ -27,7 +27,7 @@ namespace ASP.NET_DnD_App.Controllers
             IdentityUser currentUser = await _userManager.GetUserAsync(User);
 
             // Get all invites that were sent from the current DungeonMaster
-            List<CampaignInvites> sentInvites = await CampaignInvitesDB.GetCampaignInvites(_context, currentUser);
+            List<CampaignInvites> sentInvites = await CampaignInvitesDB.GetCampaignInvitesAsync(_context, currentUser);
 
             // Return all the invite to the view
             return View(sentInvites);
@@ -96,7 +96,7 @@ namespace ASP.NET_DnD_App.Controllers
                 }
 
                 // Check if basic player has a invite pending
-                int inviteNumber = await CampaignInvitesDB.HasInvite(_context, basicPlayer);
+                int inviteNumber = await CampaignInvitesDB.HasInviteAsync(_context, basicPlayer);
 
                 if (inviteNumber > 0) // If the number of invites is larger than one, don't allow to send another invite. (invite number cannot be negative)
                 {
@@ -117,7 +117,7 @@ namespace ASP.NET_DnD_App.Controllers
                 if (response.IsSuccessStatusCode)
                 {
                     // If the email was successfully sent, add the invite to the database
-                    await CampaignInvitesDB.SendInvite(_context, invite);
+                    await CampaignInvitesDB.SendInviteAsync(_context, invite);
 
                     ViewData["InviteStatus"] = $"Invite was successfully sent to {invite.InvitedPlayerUserName}";
 
@@ -145,7 +145,7 @@ namespace ASP.NET_DnD_App.Controllers
                 IdentityUser currentUser = await _userManager.GetUserAsync(User);
 
                 // Get targeted invite
-                CampaignInvites targetedInvite = await CampaignInvitesDB.GetInvite(_context, inviteCode.Code);
+                CampaignInvites targetedInvite = await CampaignInvitesDB.GetInviteAsync(_context, inviteCode.Code);
 
                 if (targetedInvite == null) // if true, there is no campaign with the entered inviteCade
                 {
@@ -183,27 +183,28 @@ namespace ASP.NET_DnD_App.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> DeleteInvite(int inviteCode) // Delete BasicPlayer from campaign
+        public async Task<IActionResult> DeleteInvite(string InvitedPlayerUserName) // Delete BasicPlayer from campaign
         {
             // Get the selected invite to delete
-            CampaignInvites invite = await CampaignInvitesDB.GetInvite(_context, inviteCode);
+            CampaignInvites invite = await CampaignInvitesDB.GetInviteByNameAsync(_context, InvitedPlayerUserName);
 
             // Return the invite to display is
             return View(invite);
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        [ActionName("Delete")]
-        public async Task<IActionResult> DeleteInviteConfirmed(int inviteCode)
+        [ActionName("DeleteInvite")]
+        public async Task<IActionResult> DeleteInviteConfirmed(string InvitedPlayerUserName)
         {
             // Get the selected invite to delete
-            CampaignInvites invite = await CampaignInvitesDB.GetInvite(_context, inviteCode);
+            CampaignInvites invite = await CampaignInvitesDB.GetInviteByNameAsync(_context, InvitedPlayerUserName);
 
             _context.Entry(invite).State = EntityState.Deleted; // Delete the selected invite from database
 
             // Save changes to the db
             await _context.SaveChangesAsync();
+
+            ViewData["DeleteInvite"] = "Invite has been successfully deleted";
 
             return RedirectToAction("Index");
         }
