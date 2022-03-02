@@ -121,7 +121,8 @@ namespace ASP.NET_DnD_App.Controllers
 
                     ViewData["InviteStatus"] = $"Invite was successfully sent to {invite.InvitedPlayerUserName}";
 
-                    return View("Index");
+                    // Go back to index
+                    return RedirectToAction("Index");
                 }
             }
 
