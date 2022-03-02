@@ -1,11 +1,9 @@
 ﻿header {
-    background-color: gray;
-    opacity: 0.8;
+    background-color: #2F3238;
 }
 
 footer {
-    background-color: gray;
-    opacity: 0.8;
+    background-color: #2F3238;
 }
 
 body {
@@ -15,14 +13,13 @@ body {
     background-attachment: fixed;
     background-size: cover;
     min-height: 100%;
-    color: azure;
-    font-family:fantasy;
+    font-family: Centaur;
 }
 
 .top-content {
     margin-top: 32vh;
     margin-left: 25%;
-    font-size: 1.4em;
+    font-size: 1.7em;
     max-width: 50%;
     text-align: center;
 }
@@ -32,8 +29,11 @@ body {
     margin-top: 70vh;
     margin-bottom: 32.5vh;
     margin-left: 25%;
-    font-size: 1.4em;
+    font-size: 1.7em;
     max-width: 50%;
     text-align: center;
 }
 
+.container {
+    color: azure;
+}
