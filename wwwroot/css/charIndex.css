@@ -1,14 +1,4 @@
-﻿header {
-    background-color: gray;
-    opacity: 0.8;
-}
-
-footer {
-    background-color: gray;
-    opacity: 0.8;
-}
-
-body {
+﻿body {
     background-image: url(../Photos/dnd.jpg);
     background-position: center center;
     background-repeat: no-repeat;
@@ -16,7 +6,7 @@ body {
     background-size: cover;
     min-height: 100%;
     color: black;
-    font-family: fantasy;
+    font-family: Centaur;
 }
 
 .top-content {
@@ -25,7 +15,6 @@ body {
     font-size: 1.4em;
     max-width: 50%;
     text-align: center;
-    color: azure;
 }
 
 
@@ -36,7 +25,6 @@ body {
     font-size: 1.4em;
     max-width: 50%;
     text-align: center;
-    color:azure;
 }
 
 td {
@@ -66,5 +54,4 @@ thead {
     font-size: 1.4em;
     max-width: 50%;
     text-align: center;
-    color:azure;
 }

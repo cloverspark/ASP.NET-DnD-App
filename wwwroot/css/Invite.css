@@ -9,14 +9,14 @@ footer {
 }
 
 body {
-    background-image: url(../Photos/dnd2.jpg);
+    background-image: url(../Photos/ArcherBackground.jpg);
     background-position: center center;
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
     min-height: 100%;
     color: black;
-    font-family: fantasy;
+    font-family: 'Segoe UI';
 }
 
 .top-content {
