@@ -117,7 +117,7 @@ namespace ASP.NET_DnD_App.Controllers
                 if (response.IsSuccessStatusCode)
                 {
                     // If the email was successfully sent, add the invite to the database
-                    await CampaignInvitesDB.SendInviteAsync(_context, invite);
+                    await CampaignInvitesDB.CreateInviteAsync(_context, invite);
 
                     ViewData["InviteStatus"] = $"Invite was successfully sent to {invite.InvitedPlayerUserName}";
 
@@ -208,6 +208,48 @@ namespace ASP.NET_DnD_App.Controllers
             ViewData["DeleteInvite"] = "Invite has been successfully deleted";
 
             return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> ResendInvite(string invitedPlayerUserName)
+        {
+            // Get the selected invite
+            CampaignInvites invite = await CampaignInvitesDB.GetInviteByNameAsync(_context, invitedPlayerUserName);
+
+            // Return it to the view
+            return View(invite);
+        }
+
+        [HttpPost]
+        [ActionName("ResendInvite")]
+        public async Task<IActionResult> ResendInviteConfirmed(int inviteCode)
+        {
+            // Get invite 
+            CampaignInvites invite = await CampaignInvitesDB.GetInviteAsync(_context, inviteCode);
+
+            // Get basic player 
+            IdentityUser basicPlayer = await _userManager.FindByNameAsync(invite.InvitedPlayerUserName);
+
+            // Resend the invite
+            // If we got this far we can start the invite process
+            // Send the targeted BasicPlayer the invite and invite code
+            string toEmail = basicPlayer.Email;
+            string fromEmail = "dndmanager.noreply@gmail.com";
+            string subject = "Campaign Invite";
+            string body = invite.DungeonMaster + " has invited you to a campaign! \n\n Your invite code is: " + invite.InviteCode;
+            string htmlContent = "";
+
+            var response = await _emailProvider.SendEmailAsync(basicPlayer.UserName, toEmail, fromEmail, subject, body, htmlContent);
+
+            if (response.IsSuccessStatusCode)
+            {
+                ViewData["ResendInvite"] = "Invite has been successfully resent";
+
+                return RedirectToAction("Index");
+            }
+
+            ViewData["ResendInvite"] = "Could not resend invite. Please try again later.";
+            return View();
         }
     }
 }

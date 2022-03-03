@@ -19,7 +19,7 @@ namespace ASP.NET_DnD_App.Data
         /// <param name="_context"></param>
         /// <param name="invite">contains dungeonMaster, invite code, and targeted BasicPlayer</param>
         /// <returns>the successfully sent invite</returns>
-        public static async Task<CampaignInvites> SendInviteAsync(ApplicationDbContext _context, CampaignInvites invite)
+        public static async Task<CampaignInvites> CreateInviteAsync(ApplicationDbContext _context, CampaignInvites invite)
         {
             _context.CampaignInvites.Add(invite);
             await _context.SaveChangesAsync();
