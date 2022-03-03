@@ -45,10 +45,23 @@ else if(ViewData["NotInvited"] != null)
 
 <br />
 <form asp-action="AcceptInvite">
-    <div class="input-group mb-3">
-        <input asp-for="Code" type="number" class="form-control" placeholder="Invite Code" aria-label="Invite Code">
-    </div>
-    <div class="form-group">
-        <input type="submit" value="Join Campaign" class="btn btn-primary" />
+    <div class="col-md-4">
+        <br />
+        <div class="form-group">
+            <input asp-for="Code" type="number" class="form-control" placeholder="Invite Code" aria-label="Invite Code">
+        </div>
+        <br />
+        <br />
+        <div class="form-group">
+            <input type="submit" value="Join Campaign" class="btn btn-primary" />
+        </div>
+
+        <br />
+        <br />
+        <br />
     </div>
 </form>
+
+<div class="back-list">
+    <a asp-action="Index" class="fs-5">Back to List</a>
+</div>
