@@ -71,20 +71,28 @@ else if(ViewData["IsInCampaign"] != null)
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Invite">
+            <br />
             <div class="form-group">
-                <label asp-for="InvitedPlayerUserName" class="control-label"></label>
+                <label asp-for="InvitedPlayerUserName" class="control-label text-light fs-3">Basic Player's Username</label>
                 <input asp-for="InvitedPlayerUserName" class="form-control" />
                 <span asp-validation-for="InvitedPlayerUserName" class="text-danger"></span>
             </div>
+            <br />
+            <br />
+
             <div class="form-group">
                 <input type="submit" value="Invite Player" class="btn btn-primary" />
             </div>
+
+            <br />
+            <br />
+            <br />
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
+<div class="back-list">
+    <a asp-action="Index" class="fs-5">Back to List</a>
 </div>
 
 @section Scripts {

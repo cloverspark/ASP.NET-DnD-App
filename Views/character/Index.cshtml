@@ -8,14 +8,19 @@
 
     @if(SignInManager.IsSignedIn(User))
     {
-    <h1>Characters List</h1>
+    <h1>Your Characters</h1>
 
-    <a asp-action="Create" asp-controller="Character">
-        Add Character
-    </a>
+    <br />
+    <br />
+
+    <a class="btn btn-primary" asp-action="Create" asp-controller="Character">Add Character</a>
+
+    <br />
+    <br />
+
 
     <div class="table-responsive">
-        <table class="table table-hover table-striped">
+        <table class="table">
             <thead>
                 <tr>
                    <th>Name</th>

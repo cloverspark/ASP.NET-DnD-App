@@ -1,11 +1,11 @@
 ﻿body {
     background-image: url(../Photos/dnd.jpg);
-    background-position: center center;
+    background-position: center;
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
     min-height: 100%;
-    color: black;
+    background-color: black;
     font-family: Centaur;
 }
 
@@ -14,7 +14,6 @@
     margin-left: 25%;
     font-size: 1.4em;
     max-width: 50%;
-    text-align: center;
 }
 
 
@@ -25,15 +24,17 @@
     font-size: 1.4em;
     max-width: 50%;
     text-align: center;
+    color: azure;
 }
 
 td {
     margin-top: 70vh;
     margin-bottom: 32.5vh;
     margin-left: 25%;
-    font-size: 1.4em;
+    font-size: 1em;
     max-width: 50%;
     text-align: center;
+    color: azure;
 }
 
 tbody {
@@ -44,14 +45,22 @@ tbody {
     font-size: 1.4em;
     max-width: 50%;
     text-align: center;
-    background-color:gray;
+    background-color: gray;
+    color: azure;
 }
 
 thead {
     margin-top: 70vh;
     margin-bottom: 32.5vh;
     margin-left: 25%;
-    font-size: 1.4em;
+    font-size: 1.8em;
     max-width: 50%;
+    text-align: center;
+    color: azure;
+}
+
+h1 {
+    font-size: 4em;
+    color: azure;
     text-align: center;
 }

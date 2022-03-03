@@ -1,69 +1,20 @@
-﻿header {
-    background-color: gray;
-    opacity: 0.8;
-}
-
-footer {
-    background-color: gray;
-    opacity: 0.8;
-}
-
-body {
+﻿body {
     background-image: url(../Photos/ArcherBackground.jpg);
     background-position: center center;
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
     min-height: 100%;
-    color: black;
-    font-family: 'Segoe UI';
+    color: azure;
+    font-family: Centaur;
 }
 
-.top-content {
-    margin-top: 32vh;
-    margin-left: 25%;
-    font-size: 1.4em;
-    max-width: 50%;
-    text-align: center;
-    color: black;
+h1 {
+    font-size: 4em;
+    text-align:center;
+    color: azure;
 }
 
-
-.content {
-    margin-top: 70vh;
-    margin-bottom: 32.5vh;
-    margin-left: 25%;
-    font-size: 1.4em;
-    max-width: 50%;
-    text-align: center;
-}
-
-td {
-    margin-top: 70vh;
-    margin-bottom: 32.5vh;
-    margin-left: 25%;
-    font-size: 1.4em;
-    max-width: 50%;
-    text-align: center;
-}
-
-tbody {
-    opacity: 0.8;
-    margin-top: 70vh;
-    margin-bottom: 32.5vh;
-    margin-left: 25%;
-    font-size: 1.4em;
-    max-width: 50%;
-    text-align: center;
-    background-color: sandybrown;
-}
-
-thead {
-    margin-top: 70vh;
-    margin-bottom: 32.5vh;
-    margin-left: 25%;
-    font-size: 1.4em;
-    max-width: 50%;
-    text-align: center;
-    color: black;
+.back-list {
+    width: fit-content;
 }
