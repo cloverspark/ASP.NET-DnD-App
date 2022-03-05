@@ -14,8 +14,8 @@ namespace ASP.NET_DnD_App.Data
 {
     public class CampaignDB
     {
-        // Get a campaign
-        public static async Task<Campaigns> GetCampaign(ApplicationDbContext _context, IdentityUser dungeonMaster)
+        // Get a campaign. This is only called when someone accepts an invite
+        public static async Task<Campaigns> GetCampaignByOwnerAsync(ApplicationDbContext _context, IdentityUser dungeonMaster)
         {
             try
             {
@@ -32,10 +32,66 @@ namespace ASP.NET_DnD_App.Data
                 };
 
                 // Create a new campaign
-                await CreateCampaign(_context, newCampaign);
+                await CreateCampaignAsync(_context, newCampaign);
 
                 return newCampaign;
             }
+        }
+
+        /// <summary>
+        /// Get campaign id if you're in a campaign
+        /// </summary>
+        /// <param name="_context"></param>
+        /// <param name="user"></param>
+        /// <returns>campaign id or if you are not in a campaign return -1</returns>
+        public static async Task<int> GetCampaignIdByUser(ApplicationDbContext _context, IdentityUser user)
+        {
+            try
+            {
+                return await (from CampaignPlayers in _context.CampaignPlayers
+                              where CampaignPlayers.BasicPlayer.Id == user.Id
+                              select CampaignPlayers.CampaignId).SingleAsync();
+            }
+            catch (InvalidOperationException)
+            {
+                try // If user is a Dungeon Master try to get the campaignId from the campaigns table
+                {
+                    return await (from Campaigns in _context.Campaigns
+                                  where Campaigns.DungeonMaster.Id == user.Id
+                                  select Campaigns.CampaignId).SingleAsync();
+                }
+                catch (InvalidOperationException) // If neither return -1
+                {
+                    return -1;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Get all players in a specific campaign by an given campaign id
+        /// </summary>
+        /// <param name="_context"></param>
+        /// <param name="campignId"></param>
+        /// <returns>list of campaign members</returns>
+        public static async Task<List<CampaignPlayers>> GetCampaignMembersByIdAsync(ApplicationDbContext _context, int campignId)
+        {
+            List<IdentityUser> basicPlayers = await (from CampaignPlayers in _context.CampaignPlayers
+                                         where CampaignPlayers.CampaignId == campignId
+                                         select CampaignPlayers.BasicPlayer).ToListAsync();
+
+            List<CampaignPlayers> campaignPlayers = await (from CampaignPlayers in _context.CampaignPlayers
+                                                           where CampaignPlayers.CampaignId == campignId
+                                                           select CampaignPlayers).ToListAsync();
+
+            return campaignPlayers;
+        }
+
+        // Get the Dungeon Master for a specific campaign
+        public static async Task<IdentityUser> GetDungeonMasterAsync(ApplicationDbContext _context, int campaignId)
+        {
+            return await (from Campaigns in _context.Campaigns
+                          where Campaigns.CampaignId == campaignId
+                          select Campaigns.DungeonMaster).SingleAsync();
         }
 
         /// <summary>
@@ -44,7 +100,7 @@ namespace ASP.NET_DnD_App.Data
         /// <param name="_context"></param>
         /// <param name="camapign"></param>
         /// <returns></returns>
-        public static async Task<Campaigns> CreateCampaign(ApplicationDbContext _context, Campaigns camapign)
+        public static async Task<Campaigns> CreateCampaignAsync(ApplicationDbContext _context, Campaigns camapign)
         {
             _context.Campaigns.Add(camapign);
             await _context.SaveChangesAsync();
@@ -59,7 +115,7 @@ namespace ASP.NET_DnD_App.Data
         /// <param name="targetedCampaign">campaign to join</param>
         /// <param name="basicPlayer">player that's joining the campaign</param>
         /// <returns></returns>
-        public static async Task<CampaignPlayers> JoinCampaign(ApplicationDbContext _context, Campaigns targetedCampaign, IdentityUser basicPlayer)
+        public static async Task<CampaignPlayers> JoinCampaignAsync(ApplicationDbContext _context, Campaigns targetedCampaign, IdentityUser basicPlayer)
         {
             CampaignPlayers newPlayer = new CampaignPlayers
             {
@@ -79,7 +135,7 @@ namespace ASP.NET_DnD_App.Data
         /// <param name="_context"></param>
         /// <param name="basicPlayer"></param>
         /// <returns>true if BasicPlayer is already in a campaign and return false if not in a campaign</returns>
-        public static async Task<bool> IsInCampaign(ApplicationDbContext _context, IdentityUser basicPlayer)
+        public static async Task<bool> IsInCampaignAsync(ApplicationDbContext _context, IdentityUser basicPlayer)
         {
             int participatingCampaigns = await (from CampaignPlayers in _context.CampaignPlayers
                                                 where CampaignPlayers.BasicPlayer == basicPlayer

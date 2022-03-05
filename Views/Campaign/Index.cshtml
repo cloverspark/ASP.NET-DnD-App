@@ -1,4 +1,8 @@
-﻿@model IEnumerable<ASP.NET_DnD_App.Models.CampaignPlayers>
+﻿@using Microsoft.AspNetCore.Identity
+@model IEnumerable<ASP.NET_DnD_App.Models.CampaignPlayers>
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+@inject IHttpContextAccessor http
 
 @{
     ViewData["Title"] = "Index";
@@ -16,6 +20,49 @@
 <p>
     @*<a asp-action="Create">Create New</a>*@
 </p>
-<table class="table"> <!--This will display all the Dungeon Masters's campaign players-->
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Campaign ID</th>
+                <th>Username</th>
+                <th>Role</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                string prevUrl = http.HttpContext.Request.Path;
 
-</table>
+            }
+
+            @{
+                if(ViewData["DungeonMaster"] != null && ViewData["CampaingId"] != null) // Make DungeonMaster the first row of the table
+                {
+                    IdentityUser dungeonMaster = ViewData["DungeonMaster"] as IdentityUser;
+
+                    <tr class="table-primary">
+                        <td>@ViewData["CampaingId"]</td>
+                        <td>@dungeonMaster.UserName</td>
+                        <td><strong>Dungeon Master</strong></td>
+                    </tr>
+
+                }
+            }
+            @foreach(CampaignPlayers person in Model)
+            {
+                <tr>
+                    <td>@person.CampaignId</td>
+                    <td>@person.BasicPlayer.UserName</td>
+                    <td>Basic Player</td>
+                    @if(await UserManager.IsInRoleAsync(await UserManager.GetUserAsync(User), "Dungeon Master")) // Only display delete button if you're the Dungeon Master
+                    {
+                        <td>
+                            <a class="btn btn-danger" asp-route-PlayerId="@person.PlayerId" asp-action="DeleteInvite">Delete</a>
+                        </td> 
+                    }
+                    
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

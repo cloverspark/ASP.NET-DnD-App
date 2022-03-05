@@ -27,9 +27,32 @@ namespace ASP.NET_DnD_App.Controllers
             _emailProvider = emailProvider;
         }
 
-        public IActionResult Index() // View all players in the current DungeonMatser's campaign
+        public async Task<IActionResult> IndexAsync()
         {
-            return View();
+            // Get the current user and Dungeon Master
+            IdentityUser currentUser = await _userManager.GetUserAsync(User);
+            IdentityUser dungeonMaster;
+
+            // Get campaign id
+            int campaignId = await CampaignDB.GetCampaignIdByUser(_context, currentUser);
+
+            // Get all your campaign members
+            List<CampaignPlayers> allCampaignMembers = await CampaignDB.GetCampaignMembersByIdAsync(_context, campaignId);
+
+            //if (campaignId >= 0) // If campaignId is greater than -1 means that user is in a campaign
+
+                // Get the Dungeon Master
+                dungeonMaster = await CampaignDB.GetDungeonMasterAsync(_context, campaignId);
+
+                // Send dungeonMaster to the View
+                ViewData["DungeonMaster"] = dungeonMaster;
+
+                // Send campaignId to the View
+                ViewData["CampaingId"] = campaignId;
+            //}
+            
+            // If no campaign members just return the view
+            return View(allCampaignMembers);
         }
     }
 }
