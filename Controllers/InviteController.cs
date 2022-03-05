@@ -86,7 +86,7 @@ namespace ASP.NET_DnD_App.Controllers
                 invite.DungeonMaster = currentUser;
 
                 // Check if BasicPlayer is already part of a campaign
-                bool inCampaign = await CampaignDB.IsInCampaign(_context, basicPlayer);
+                bool inCampaign = await CampaignDB.IsInCampaignAsync(_context, basicPlayer);
 
                 if (inCampaign)
                 {
@@ -168,10 +168,10 @@ namespace ASP.NET_DnD_App.Controllers
                     // Add the player to the campaign
 
                     // Get the desired campaign
-                    Campaigns campaign = await CampaignDB.GetCampaign(_context, targetedInvite.DungeonMaster);
+                    Campaigns campaign = await CampaignDB.GetCampaignByOwnerAsync(_context, targetedInvite.DungeonMaster);
 
                     // Add player to campaign
-                    CampaignPlayers campaignPlayer = await CampaignDB.JoinCampaign(_context, campaign, currentUser);
+                    CampaignPlayers campaignPlayer = await CampaignDB.JoinCampaignAsync(_context, campaign, currentUser);
 
                     // Delete the invite from database
                     _context.Entry(targetedInvite).State = EntityState.Deleted;
