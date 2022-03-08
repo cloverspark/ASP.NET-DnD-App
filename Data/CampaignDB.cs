@@ -46,25 +46,9 @@ namespace ASP.NET_DnD_App.Data
         /// <returns>campaign id or if you are not in a campaign return -1</returns>
         public static async Task<int> GetCampaignIdByUser(ApplicationDbContext _context, IdentityUser user)
         {
-            try
-            {
                 return await (from CampaignPlayers in _context.CampaignPlayers
                               where CampaignPlayers.BasicPlayer.Id == user.Id
-                              select CampaignPlayers.CampaignId).SingleAsync();
-            }
-            catch (InvalidOperationException)
-            {
-                try // If user is a Dungeon Master try to get the campaignId from the campaigns table
-                {
-                    return await (from Campaigns in _context.Campaigns
-                                  where Campaigns.DungeonMaster.Id == user.Id
-                                  select Campaigns.CampaignId).SingleAsync();
-                }
-                catch (InvalidOperationException) // If neither return -1
-                {
-                    return -1;
-                }
-            }
+                              select CampaignPlayers.CampaignId).SingleOrDefaultAsync();
         }
 
         /// <summary>
@@ -75,13 +59,10 @@ namespace ASP.NET_DnD_App.Data
         /// <returns>list of campaign members</returns>
         public static async Task<List<CampaignPlayers>> GetCampaignMembersByIdAsync(ApplicationDbContext _context, int campignId)
         {
-            List<IdentityUser> basicPlayers = await (from CampaignPlayers in _context.CampaignPlayers
-                                         where CampaignPlayers.CampaignId == campignId
-                                         select CampaignPlayers.BasicPlayer).ToListAsync();
 
             List<CampaignPlayers> campaignPlayers = await (from CampaignPlayers in _context.CampaignPlayers
                                                            where CampaignPlayers.CampaignId == campignId
-                                                           select CampaignPlayers).ToListAsync();
+                                                           select CampaignPlayers).Include(nameof(CampaignPlayers.BasicPlayer)).ToListAsync();
 
             return campaignPlayers;
         }
@@ -91,7 +72,7 @@ namespace ASP.NET_DnD_App.Data
         {
             return await (from Campaigns in _context.Campaigns
                           where Campaigns.CampaignId == campaignId
-                          select Campaigns.DungeonMaster).SingleAsync();
+                          select Campaigns.DungeonMaster).SingleOrDefaultAsync();
         }
 
         /// <summary>
