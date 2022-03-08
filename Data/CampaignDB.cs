@@ -14,6 +14,14 @@ namespace ASP.NET_DnD_App.Data
 {
     public class CampaignDB
     {
+        // Get a campaign member by playerId
+        public static async Task<CampaignPlayers> GetCampaignPlayerAsync(ApplicationDbContext _context, int playerId)
+        {
+            return await (from CampaignPlayers in _context.CampaignPlayers
+                          where CampaignPlayers.PlayerId == playerId
+                          select CampaignPlayers).Include(nameof(CampaignPlayers.BasicPlayer)).SingleOrDefaultAsync();
+        }
+
         // Get a campaign. This is only called when someone accepts an invite
         public static async Task<Campaigns> GetCampaignByOwnerAsync(ApplicationDbContext _context, IdentityUser dungeonMaster)
         {

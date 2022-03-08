@@ -61,5 +61,30 @@ namespace ASP.NET_DnD_App.Controllers
             // If no campaign members just return the view
             return View(allCampaignMembers);
         }
+
+        [HttpGet]
+        public async Task<IActionResult> DeletePlayer(int playerId)
+        {
+            // Get campaign player
+            CampaignPlayers campaignMember = await CampaignDB.GetCampaignPlayerAsync(_context, playerId);
+
+            return View(campaignMember);
+        }
+
+        [HttpPost]
+        [ActionName("DeletePlayer")]
+        public async Task<IActionResult> DeletePlayerConfirmed(int playerId)
+        {
+            // Get campaign player
+            CampaignPlayers campaignMember = await CampaignDB.GetCampaignPlayerAsync(_context, playerId);
+
+            // Delete player 
+            _context.Entry(campaignMember).State = EntityState.Deleted;
+
+            // Save changes
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("Index");
+        }
     }
 }
