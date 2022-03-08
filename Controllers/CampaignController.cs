@@ -34,7 +34,17 @@ namespace ASP.NET_DnD_App.Controllers
             IdentityUser dungeonMaster;
 
             // Get campaign id
-            int campaignId = await CampaignDB.GetCampaignIdByUser(_context, currentUser);
+            int campaignId = -1;
+
+            if (await _userManager.IsInRoleAsync(currentUser, "Dungeon Master")) // If user is a Dungeon Master look on the Campaigns table
+            {
+                campaignId = await CampaignDB.GetCampaignIdByDungeonMasterAsync(_context, currentUser);
+            }
+
+            else // If user is a Basic Player look in CampaignPlayers table
+            {
+                campaignId = await CampaignDB.GetCampaignIdByPlayer(_context, currentUser);
+            }
 
             // Get all your campaign members
             List<CampaignPlayers> allCampaignMembers = await CampaignDB.GetCampaignMembersByIdAsync(_context, campaignId);

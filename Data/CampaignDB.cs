@@ -43,12 +43,25 @@ namespace ASP.NET_DnD_App.Data
         /// </summary>
         /// <param name="_context"></param>
         /// <param name="user"></param>
-        /// <returns>campaign id or if you are not in a campaign return -1</returns>
-        public static async Task<int> GetCampaignIdByUser(ApplicationDbContext _context, IdentityUser user)
+        /// <returns>campaign id</returns>
+        public static async Task<int> GetCampaignIdByPlayer(ApplicationDbContext _context, IdentityUser user)
         {
                 return await (from CampaignPlayers in _context.CampaignPlayers
                               where CampaignPlayers.BasicPlayer.Id == user.Id
                               select CampaignPlayers.CampaignId).SingleOrDefaultAsync();
+        }
+
+        /// <summary>
+        /// Get campaign id if you're a dungeon master
+        /// </summary>
+        /// <param name="_context"></param>
+        /// <param name="user"></param>
+        /// <returns>campaign id</returns>
+        public static async Task<int> GetCampaignIdByDungeonMasterAsync(ApplicationDbContext _context, IdentityUser user)
+        {
+            return await (from Campaigns in _context.Campaigns
+                          where Campaigns.DungeonMaster.Id == user.Id
+                          select Campaigns.CampaignId).SingleOrDefaultAsync();
         }
 
         /// <summary>
