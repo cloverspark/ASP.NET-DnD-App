@@ -48,16 +48,16 @@
 
                 }
             }
-            @foreach(CampaignPlayers person in Model)
+            @foreach(CampaignPlayers player in Model)
             {
                 <tr>
-                    <td>@person.CampaignId</td>
-                    <td>@person.BasicPlayer.UserName</td>
+                    <td>@player.CampaignId</td>
+                    <td>@player.BasicPlayer.UserName</td>
                     <td>Basic Player</td>
                     @if(await UserManager.IsInRoleAsync(await UserManager.GetUserAsync(User), "Dungeon Master")) // Only display delete button if you're the Dungeon Master
                     {
                         <td>
-                            <a class="btn btn-danger" asp-route-PlayerId="@person.PlayerId" asp-action="DeleteInvite">Delete</a>
+                            <a class="btn btn-danger" asp-route-PlayerId="@player.PlayerId" asp-action="DeletePlayer">Delete</a>
                         </td> 
                     }
                     
