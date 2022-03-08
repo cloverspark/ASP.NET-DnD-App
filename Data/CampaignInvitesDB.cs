@@ -41,20 +41,10 @@ namespace ASP.NET_DnD_App.Data
         /// <returns></returns>
         public static async Task<CampaignInvites> GetInviteAsync(ApplicationDbContext _context, int inviteCode)
         {
-            try
-            {                           // Ask why I have to do this to get DungeonMaster
-                IdentityUser person = await (from CampaignInvites in _context.CampaignInvites
-                                             where CampaignInvites.InviteCode == inviteCode
-                                             select CampaignInvites.DungeonMaster).SingleAsync();
-                CampaignInvites campaign = await (from CampaignInvites in _context.CampaignInvites
-                                                  where CampaignInvites.InviteCode == inviteCode
-                                                  select CampaignInvites).SingleAsync();
-                return campaign;
-            }
-            catch(InvalidOperationException) // If there is no invite with that code return null
-            {
-                return null;
-            }
+            CampaignInvites? campaign = await (from CampaignInvites in _context.CampaignInvites
+                                                where CampaignInvites.InviteCode == inviteCode
+                                                select CampaignInvites).Include(nameof(CampaignInvites.DungeonMaster)).SingleOrDefaultAsync();
+            return campaign;
         }
 
         /// <summary>

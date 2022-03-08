@@ -1,5 +1,6 @@
 ﻿using ASP.NET_DnD_App.Data;
 using ASP.NET_DnD_App.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -131,6 +132,7 @@ namespace ASP.NET_DnD_App.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Basic Player")]
         public IActionResult AcceptInvite()
         {
             return View();
@@ -138,6 +140,7 @@ namespace ASP.NET_DnD_App.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Basic Player")]
         public async Task<IActionResult> AcceptInviteAsync(InviteCode inviteCode)
         {
             if (ModelState.IsValid)
