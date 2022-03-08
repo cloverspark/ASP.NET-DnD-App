@@ -22,8 +22,12 @@ namespace ASP.NET_DnD_App.Controllers
             _emailProvider = emailProvider;
         }
 
+        [Authorize(Roles = "Dungeon Master")]
         public async Task<IActionResult> IndexAsync()
         {
+            // Set ViewData["InviteIndex"] != null
+            ViewData["InviteIndex"] = "Not null";
+
             // Get the current user
             IdentityUser currentUser = await _userManager.GetUserAsync(User);
 
@@ -35,6 +39,7 @@ namespace ASP.NET_DnD_App.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Dungeon Master")]
         public IActionResult Invite()
         {
             return View();
@@ -42,6 +47,7 @@ namespace ASP.NET_DnD_App.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Dungeon Master")]
         public async Task<IActionResult> Invite(CampaignInvites invite)
         {
             if (ModelState.IsValid)
@@ -187,6 +193,7 @@ namespace ASP.NET_DnD_App.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Dungeon Master")]
         public async Task<IActionResult> DeleteInvite(string InvitedPlayerUserName) // Delete BasicPlayer from campaign
         {
             // Get the selected invite to delete
@@ -198,6 +205,7 @@ namespace ASP.NET_DnD_App.Controllers
 
         [HttpPost]
         [ActionName("DeleteInvite")]
+        [Authorize(Roles = "Dungeon Master")]
         public async Task<IActionResult> DeleteInviteConfirmed(string InvitedPlayerUserName)
         {
             // Get the selected invite to delete
@@ -214,6 +222,7 @@ namespace ASP.NET_DnD_App.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Dungeon Master")]
         public async Task<IActionResult> ResendInvite(string invitedPlayerUserName)
         {
             // Get the selected invite
@@ -225,6 +234,7 @@ namespace ASP.NET_DnD_App.Controllers
 
         [HttpPost]
         [ActionName("ResendInvite")]
+        [Authorize(Roles = "Dungeon Master")]
         public async Task<IActionResult> ResendInviteConfirmed(int inviteCode)
         {
             // Get invite 

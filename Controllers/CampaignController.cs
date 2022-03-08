@@ -8,6 +8,7 @@ using ASP.NET_DnD_App.Models;
 using ASP.NET_DnD_App.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ASP.NET_DnD_App.Controllers
 {
@@ -63,6 +64,7 @@ namespace ASP.NET_DnD_App.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Dungeon Master")]
         public async Task<IActionResult> DeletePlayer(int playerId)
         {
             // Get campaign player
@@ -73,6 +75,7 @@ namespace ASP.NET_DnD_App.Controllers
 
         [HttpPost]
         [ActionName("DeletePlayer")]
+        [Authorize(Roles = "Dungeon Master")]
         public async Task<IActionResult> DeletePlayerConfirmed(int playerId)
         {
             // Get campaign player
