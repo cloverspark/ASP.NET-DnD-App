@@ -35,9 +35,9 @@
                 {
                     IdentityUser dungeonMaster = ViewData["DungeonMaster"] as IdentityUser;
 
-                    <tr class="table-primary">
-                        <td>@ViewData["CampaingId"]</td>
-                        <td>@dungeonMaster.UserName</td>
+                    <tr>
+                        <td><strong>@ViewData["CampaingId"]</strong></td>
+                        <td><strong>@dungeonMaster.UserName</strong></td>
                         <td><strong>Dungeon Master</strong></td>
                     </tr>
 

@@ -189,7 +189,7 @@ namespace ASP.NET_DnD_App.Controllers
                 }
             }
 
-            return View();
+            return RedirectToAction("Index", "Campaign");
         }
 
         [HttpGet]
