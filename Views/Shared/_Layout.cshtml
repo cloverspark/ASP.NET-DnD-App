@@ -40,8 +40,14 @@
                             @if(await UserManager.IsInRoleAsync(await UserManager.GetUserAsync(User),"Dungeon Master"))
                             {
                                 <li class="nav-item">
-                                    <a id="navLink" class="nav-link text-light" asp-area="" asp-controller="Invite" asp-action="Index">Invites</a>
+                                    <a id="navLink" class="nav-link text-light" asp-area="" asp-controller="Invite" asp-action="Index">Sent Invites</a>
                                 </li>
+                                @if(ViewData["InviteIndex"] != null)
+                                {
+                                    <li class="nav-item">
+                                        <a id="navLink" class="nav-link text-light" asp-area="" asp-controller="Invite" asp-action="Invite">Invite Player</a>
+                                    </li>
+                                }
                             }
 
                             @if(await UserManager.IsInRoleAsync(await UserManager.GetUserAsync(User),"Basic Player"))
@@ -50,13 +56,7 @@
                                     <a id="navLink" class="nav-link text-light" asp-area="" asp-controller="Invite" asp-action="AcceptInvite">Enter Invite Code</a>
                                 </li>
                             }
-
-                            @if(await UserManager.IsInRoleAsync(await UserManager.GetUserAsync(User),"Dungeon Master") && ViewData["InviteIndex"] != null)
-                            {
-                                <li class="nav-item">
-                                    <a id="navLink" class="nav-link text-light" asp-area="" asp-controller="Invite" asp-action="Invite">Invite Player</a>
-                                </li>
-                            }
+                            
                         }
                     </ul>
                     <partial name="_LoginPartial" />
