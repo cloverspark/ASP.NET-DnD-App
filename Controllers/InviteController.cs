@@ -147,7 +147,7 @@ namespace ASP.NET_DnD_App.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Basic Player")]
-        public async Task<IActionResult> AcceptInviteAsync(InviteCode inviteCode)
+        public async Task<IActionResult> AcceptInviteAsync(InviteCode invite)
         {
             if (ModelState.IsValid)
             {
@@ -155,9 +155,9 @@ namespace ASP.NET_DnD_App.Controllers
                 IdentityUser currentUser = await _userManager.GetUserAsync(User);
 
                 // Get targeted invite
-                CampaignInvites targetedInvite = await CampaignInvitesDB.GetInviteAsync(_context, inviteCode.Code);
+                CampaignInvites targetedInvite = await CampaignInvitesDB.GetInviteAsync(_context, invite.Code, currentUser);
 
-                if (targetedInvite == null) // if true, there is no campaign with the entered inviteCade
+                if (targetedInvite == null) // if true, there is no campaign with the entered inviteCode
                 {
                     ViewData["Invite"] = "Could not find a campaign with that invite code. Check invite code and try again.";
 
@@ -237,8 +237,11 @@ namespace ASP.NET_DnD_App.Controllers
         [Authorize(Roles = "Dungeon Master")]
         public async Task<IActionResult> ResendInviteConfirmed(int inviteCode)
         {
+            // Get current user
+            IdentityUser currentUser = await _userManager.GetUserAsync(User);
+
             // Get invite 
-            CampaignInvites invite = await CampaignInvitesDB.GetInviteAsync(_context, inviteCode);
+            CampaignInvites invite = await CampaignInvitesDB.GetInviteAsync(_context, inviteCode, currentUser);
 
             // Get basic player 
             IdentityUser basicPlayer = await _userManager.FindByNameAsync(invite.InvitedPlayerUserName);

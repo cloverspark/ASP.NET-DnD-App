@@ -39,10 +39,12 @@ namespace ASP.NET_DnD_App.Data
         /// <param name="_context"></param>
         /// <param name="inviteCode"></param>
         /// <returns></returns>
-        public static async Task<CampaignInvites> GetInviteAsync(ApplicationDbContext _context, int inviteCode)
+        public static async Task<CampaignInvites> GetInviteAsync(ApplicationDbContext _context, int inviteCode, IdentityUser currUser)
         {
             CampaignInvites? campaign = await (from CampaignInvites in _context.CampaignInvites
                                                 where CampaignInvites.InviteCode == inviteCode
+                                                && (CampaignInvites.InvitedPlayerUserName == currUser.UserName
+                                                || CampaignInvites.DungeonMaster == currUser)
                                                 select CampaignInvites).Include(nameof(CampaignInvites.DungeonMaster)).SingleOrDefaultAsync();
             return campaign;
         }
