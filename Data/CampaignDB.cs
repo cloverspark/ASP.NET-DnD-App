@@ -52,7 +52,7 @@ namespace ASP.NET_DnD_App.Data
         /// <param name="_context"></param>
         /// <param name="user"></param>
         /// <returns>campaign id</returns>
-        public static async Task<int> GetCampaignIdByPlayer(ApplicationDbContext _context, IdentityUser user)
+        public static async Task<int> GetCampaignIdByPlayerAsync(ApplicationDbContext _context, IdentityUser user)
         {
                 return await (from CampaignPlayers in _context.CampaignPlayers
                               where CampaignPlayers.BasicPlayer.Id == user.Id

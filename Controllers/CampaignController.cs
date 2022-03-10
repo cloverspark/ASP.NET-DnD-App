@@ -44,7 +44,7 @@ namespace ASP.NET_DnD_App.Controllers
 
             else // If user is a Basic Player look in CampaignPlayers table
             {
-                campaignId = await CampaignDB.GetCampaignIdByPlayer(_context, currentUser);
+                campaignId = await CampaignDB.GetCampaignIdByPlayerAsync(_context, currentUser);
             }
 
             // Get all your campaign members
@@ -55,9 +55,6 @@ namespace ASP.NET_DnD_App.Controllers
 
             // Send dungeonMaster to the View
             ViewData["DungeonMaster"] = dungeonMaster;
-
-            // Send campaignId to the View
-            ViewData["CampaingId"] = campaignId;
             
             // If no campaign members just return the view
             return View(allCampaignMembers);
