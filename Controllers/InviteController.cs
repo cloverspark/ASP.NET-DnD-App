@@ -194,10 +194,10 @@ namespace ASP.NET_DnD_App.Controllers
 
         [HttpGet]
         [Authorize(Roles = "Dungeon Master")]
-        public async Task<IActionResult> DeleteInvite(string InvitedPlayerUserName) // Delete BasicPlayer from campaign
+        public async Task<IActionResult> DeleteInvite(string invitedPlayerUserName) // Delete BasicPlayer from campaign
         {
             // Get the selected invite to delete
-            CampaignInvites invite = await CampaignInvitesDB.GetInviteByNameAsync(_context, InvitedPlayerUserName);
+            CampaignInvites invite = await CampaignInvitesDB.GetInviteByNameAsync(_context, invitedPlayerUserName);
 
             // Return the invite to display is
             return View(invite);
@@ -206,10 +206,10 @@ namespace ASP.NET_DnD_App.Controllers
         [HttpPost]
         [ActionName("DeleteInvite")]
         [Authorize(Roles = "Dungeon Master")]
-        public async Task<IActionResult> DeleteInviteConfirmed(string InvitedPlayerUserName)
+        public async Task<IActionResult> DeleteInviteConfirmed(string invitedPlayerUserName)
         {
             // Get the selected invite to delete
-            CampaignInvites invite = await CampaignInvitesDB.GetInviteByNameAsync(_context, InvitedPlayerUserName);
+            CampaignInvites invite = await CampaignInvitesDB.GetInviteByNameAsync(_context, invitedPlayerUserName);
 
             _context.Entry(invite).State = EntityState.Deleted; // Delete the selected invite from database
 
