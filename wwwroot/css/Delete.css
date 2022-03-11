@@ -1,21 +1,28 @@
-﻿body {
-    background-image: url(../Photos/wallpaper_Illo-2.jpg);
+﻿header {
+    background-color: #2F3238;
+}
+
+footer {
+    background-color: #2F3238;
+}
+
+body {
+    background-image: url(../Photos/dndsunset.jpg);
     background-position: center center;
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
     min-height: 100%;
-    color: azure;
     font-family: Centaur;
+    text-align:center;
 }
 
 .top-content {
     margin-top: 32vh;
     margin-left: 25%;
-    font-size: 1.4em;
+    font-size: 1.7em;
     max-width: 50%;
     text-align: center;
-    color: azure;
 }
 
 
@@ -23,23 +30,21 @@
     margin-top: 70vh;
     margin-bottom: 32.5vh;
     margin-left: 25%;
-    font-size: 1.4em;
+    font-size: 1.7em;
     max-width: 50%;
     text-align: center;
+}
+
+.container {
     color: azure;
 }
 
-.needs-validation {
-    color: azure;
-    font-size: 1.2em;
+.row {
+    margin-top:auto;
+    margin-bottom:auto;
 }
 
-.edit-labels {
-    color:azure;
-    font-family:Centaur;
-}
-
-h1 {
-    color: azure;
-    font-family: Centaur;
+.aos-init {
+    margin-top:auto;
+    margin-bottom:auto;
 }
