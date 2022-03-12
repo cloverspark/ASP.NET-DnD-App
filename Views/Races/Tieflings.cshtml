@@ -18,77 +18,63 @@
   </thead>
   <tbody>
     <tr>
-      <td>Asmodeus Tiefling</td>
+      <td><button id="hi" type="button" class="btn btn-link" onclick="AsmodeusTieflingOnClick()">Asmodeus Tiefling</button></td>
       <td>Common, Infernal</td>
       <td>Medium</td>
       <td>30</td>
       <td>2 CHA, 1 INT</td>
     </tr>
     <tr>
-      <td>Baalzebul Tiefling</td>
+      <td><button id="hi" type="button" class="btn btn-link" onclick="BaalzebulTieflingOnClick()">Baalzebul Tiefling</button></td>
       <td>Common, Infernal</td>
       <td>Medium</td>
       <td>30</td>
       <td>2 CHA, 1 INT</td>
     </tr>
     <tr>
-      <td>Dispater Tiefling</td>
+      <td><button id="hi" type="button" class="btn btn-link" onclick="DispaterTieflingOnClick()">Dispater Tiefling</button></td>
       <td>Common, Infernal</td>
       <td>Medium</td>
       <td>30</td>
       <td>2 CHA, 1 DEX</td>
     </tr>
     <tr>
-      <td>Feral Tiefling</td>
-      <td>Common, Infernal</td>
-      <td>Medium</td>
-      <td>30</td>
-      <td>2 DEX, 1 INT</td>
-    </tr>
-    <tr>
-      <td>Fierna Tiefling</td>
+      <td><button id="hi" type="button" class="btn btn-link" onclick="FiernaTieflingOnClick()">Fierna Tiefling</button></td>
       <td>Common, Infernal</td>
       <td>Medium</td>
       <td>30</td>
       <td>2 CHA, 1 WIS</td>
     </tr>
     <tr>
-      <td>Glasya Tiefling</td>
+      <td><button id="hi" type="button" class="btn btn-link" onclick="GlasyaTieflingOnClick()">Glasya Tiefling</button></td>
       <td>Common, Infernal</td>
       <td>Medium</td>
       <td>30</td>
       <td>2 CHA, 1 DEX</td>
     </tr>
     <tr>
-      <td>Levistus Tiefling</td>
+      <td><button id="hi" type="button" class="btn btn-link" onclick="LevistusTieflingOnClick()">Levistus Tiefling</button></td>
       <td>Common, Infernal</td>
       <td>Medium</td>
       <td>30</td>
       <td>2 CHA, 1 CON</td>
     </tr>
     <tr>
-      <td>Mammon Tiefling</td>
+      <td><button id="hi" type="button" class="btn btn-link" onclick="MammonTieflingOnClick()">Mammon Tiefling</button></td>
       <td>Common, Infernal</td>
       <td>Medium</td>
       <td>30</td>
       <td>2 CHA, 1 INT</td>
     </tr>
     <tr>
-      <td>Mephistopheles Tiefling</td>
+      <td><button id="hi" type="button" class="btn btn-link" onclick="MephistophelesTieflingOnClick()">Mephistopheles Tiefling</button></td>
       <td>Common, Infernal</td>
       <td>Medium</td>
       <td>30</td>
       <td>2 CHA, 1 INT</td>
     </tr>
     <tr>
-      <td>Variant Tiefling</td>
-      <td>Common, Infernal</td>
-      <td>Medium</td>
-      <td>30</td>
-      <td>2 CHA, 1 INT</td>
-    </tr>
-    <tr>
-      <td>Zariel Tiefling</td>
+      <td><button id="hi" type="button" class="btn btn-link" onclick="ZarielTieflingOnClick()">Zariel Tiefling</button></td>
       <td>Common, Infernal</td>
       <td>Medium</td>
       <td>30</td>
@@ -98,4 +84,51 @@
 </table>
 <!-- This is an empty P(paragraph) so descriptions can show up when linked subrace name clicked  -->
 <p style="display=none" class="Des" id="Des"></p>
-<!-- Each function is set for one sub race to give as brief description -->
+<!-- Each function is set for one sub race to give as brief description 10 -->
+<script>
+    function AsmodeusTieflingOnClick() {
+        var p = document.getElementById("Des");
+        p.innerText = "This Tiefling  carries the blood of Asmodeus the archdevil and ruler of the Nine Hells.";
+        p.style.display = "block";
+    }
+    function BaalzebulTieflingOnClick() {
+        var p = document.getElementById("Des");
+        p.innerText = "This Tiefling  carries the blood of Baalzebul, who was formerly an archon known as Triel,and most infamous archdevil next to Asmodeus himself.";
+        p.style.display = "block";
+    }
+    function DispaterTieflingOnClick() {
+        var p = document.getElementById("Des");
+        p.innerText = "This Tiefling  carries the blood of Dispater, who is the Lord of Dis and an archdevil whose extreme vigilance almost personified caution.";
+        p.style.display = "block";
+    }
+    function FiernaTieflingOnClick() {
+        var p = document.getElementById("Des");
+        p.innerText = "This Tiefling  carries the blood of Fierna, who is the lady of Phlegethos who, along with Belial, her father, were the only archdevils allowed to share rulership over one of the Nine Hells by Asmodeus.";
+        p.style.display = "block";
+    }
+    function GlasyaTieflingOnClick() {
+        var p = document.getElementById("Des");
+        p.innerText = "This Tiefling  carries the blood of Glasya, she is the daughter of Asmodeus, therefore making her the Princess of the Nine Hells.";
+        p.style.display = "block";
+    }
+    function LevistusTieflingOnClick() {
+        var p = document.getElementById("Des");
+        p.innerText = "This Tiefling  carries the blood of Levistus, who is The Lord of the Fifth, The Rogue Archdevil, is the imprisoned devil prince who rules Stygia, fifth layer of the Nine Hells.";
+        p.style.display = "block";
+    }
+    function MammonTieflingOnClick() {
+        var p = document.getElementById("Des");
+        p.innerText = "This Tiefling  carries the blood of Mammon, who is the lord of the identically named Minauros, and potentially the richest being in existence.";
+        p.style.display = "block";
+    }
+    function MephistophelesTieflingOnClick() {
+        var p = document.getElementById("Des");
+        p.innerText = "This Tiefling  carries the blood of Mephistopheles, who is the lord of Cania and most powerful archdevil next to Asmodeus himself.";
+        p.style.display = "block";
+    }
+    function ZarielTieflingOnClick() {
+        var p = document.getElementById("Des");
+        p.innerText = "This Tiefling  carries the blood of Zariel, who is theord of Avernus, an archduchess dedicated to winning the unending Blood War between devils and demons. She was originally an angel of the Seven Heavens before transforming into an archdevil and falling to the Nine Hells.";
+        p.style.display = "block";
+    }
+</script>
